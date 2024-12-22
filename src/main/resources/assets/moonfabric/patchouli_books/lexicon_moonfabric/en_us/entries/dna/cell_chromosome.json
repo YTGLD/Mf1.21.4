@@ -1,0 +1,15 @@
+{
+  "name": "chromosomal_structural_variation",
+  "icon": "moonfabric:cell_chromosome",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_chromosome",
+      "title": "-chromosomal-structural-variation-",
+      "text":"Right-click and deposit $(br2) into the dish to increase the safe drop distance, the effect depends on the number of evolutionary genes inside the dish"
+    }
+  ]
+}

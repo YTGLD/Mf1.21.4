@@ -1,0 +1,15 @@
+{
+  "name": "meritBasedEvolution",
+  "icon": "moonfabric:cell_preferential",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_preferential",
+      "title": "meritocraticEvolution",
+      "text":"Right-clicking $(br2) in a petri dish significantly increases maximum health and healing, depending on the number of evolutionary genes inside the dish"
+    }
+  ]
+}

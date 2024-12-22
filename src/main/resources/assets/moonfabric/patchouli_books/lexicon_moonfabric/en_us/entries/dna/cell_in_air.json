@@ -1,0 +1,15 @@
+{
+  "name": "atmosphericAffinity",
+  "icon": "moonfabric:cell_in_air",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_in_air",
+      "title": "-大气亲和性-",
+      "text":"Right-click $(br2) in the dish to increase the jump height, the effect of which depends on the number of genes evolved"
+    }
+  ]
+}

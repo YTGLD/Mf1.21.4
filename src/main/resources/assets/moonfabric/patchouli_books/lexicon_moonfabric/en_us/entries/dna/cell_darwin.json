@@ -1,0 +1,15 @@
+{
+  "name": "darwinism",
+  "icon": "moonfabric:cell_darwin",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_darwin",
+      "title": "-darwinism-",
+      "text":"Right-clicking $(br2) in a Petri dish to kill a mob will restore or reduce a large amount of health, depending on the number of genes in this evolution"
+    }
+  ]
+}

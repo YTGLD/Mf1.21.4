@@ -1,0 +1,15 @@
+{
+  "name": "creationism",
+  "icon": "moonfabric:cell_god",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_god",
+      "title": "-creationism-",
+      "text":"Right-clicking $(br2) in a petri dish to kill a mob will restore health, depending on the number of genes in this evolution"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "extremelyFastMetabolism",
+  "icon": "moonfabric:speed_metabolism",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:speed_metabolism",
+      "title": "rapidMetabolism",
+      "text":"Right-click $(br2) in a Petri dish to quickly consume hunger at critical times, and its effect depends on the number of genes in this evolution"
+    }
+  ]
+}

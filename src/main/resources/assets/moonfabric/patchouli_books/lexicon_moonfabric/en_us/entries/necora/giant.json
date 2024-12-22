@@ -1,0 +1,15 @@
+{
+  "name": "cellRegeneration",
+  "icon": "moonfabric:giant",
+  "category": "moonfabric:necora",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:giant",
+      "title": "cellRegeneration",
+      "text":"This gene fragment can only be found in the chest when wearing the zombie virus, and only by wearing it can you get a segmented genome, and the special thing is that after wearing this item, the probability of not being able to get the $(br2) gene fragment in duplication is 10%"
+    }
+  ]
+}

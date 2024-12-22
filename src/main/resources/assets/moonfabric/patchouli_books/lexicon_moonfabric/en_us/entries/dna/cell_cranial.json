@@ -1,0 +1,15 @@
+{
+  "name": "metastasesOfBrainTissue",
+  "icon": "moonfabric:cell_cranial",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_cranial",
+      "title": "-metastasesOfBrainTissue-",
+      "text":"Right-click and deposit $(br2) into the dish to reduce the damage of falling blocks above and the damage of projectiles, depending on the number of evolutionary genes inside the dish"
+    }
+  ]
+}

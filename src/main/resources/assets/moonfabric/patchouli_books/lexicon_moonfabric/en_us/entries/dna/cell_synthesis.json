@@ -1,0 +1,15 @@
+{
+  "name": "peptideSynthesisIsEnhanced",
+  "icon": "moonfabric:cell_synthesis",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_synthesis",
+      "title": "peptideSynthesisEnhancement",
+      "text":"Right-click $(br2) in a dish to increase attack speed, the effect of which depends on the number of Evolution Genes in the dish"
+    }
+  ]
+}

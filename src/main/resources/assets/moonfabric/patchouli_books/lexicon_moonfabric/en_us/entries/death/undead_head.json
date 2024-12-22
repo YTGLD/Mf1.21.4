@@ -1,0 +1,15 @@
+{
+  "name": "Undead Skeleton",
+  "icon": "moonfabric:undead_head",
+  "category": "moonfabric:death",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:undead_head",
+      "title": "-Undead Skeleton-",
+      "text": "Found in dungeons and bastions of piglins$(br2)The loss of health is proportional to your combat power."
+    }
+  ]
+}

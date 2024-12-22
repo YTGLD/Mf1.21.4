@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "com.moonfabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "DrawContextMixin",
+    "GameRendererMixin",
+    "HandledScreenMixin",
+    "LivingEntityRendererMixin",
+    "PostEffectProcessorMixin",
+    "RenderLayersMixin",
+    "WorldRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+  ]
+}

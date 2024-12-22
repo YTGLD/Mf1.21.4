@@ -1,0 +1,15 @@
+{
+  "name": "metabolicDisorders",
+  "icon": "moonfabric:cell_disorder",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_disorder",
+      "title": "-metabolicDisorders-",
+      "text":"Right-click $(br2) in the dish to clear all effects at intervals, depending on the number of genes in this evolution"
+    }
+  ]
+}

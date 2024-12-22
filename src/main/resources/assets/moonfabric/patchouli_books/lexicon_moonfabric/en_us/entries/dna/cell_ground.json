@@ -1,0 +1,15 @@
+{
+  "name": "earthAffinity",
+  "icon": "moonfabric:cell_ground",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_ground",
+      "title": "earthAffinity",
+      "text":"Right-click $(br2) in a Petri dish to increase the mining speed, and its effect depends on the number of genes that have evolved"
+    }
+  ]
+}

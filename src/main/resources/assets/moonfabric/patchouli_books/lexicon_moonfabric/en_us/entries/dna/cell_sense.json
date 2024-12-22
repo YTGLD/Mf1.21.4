@@ -1,0 +1,15 @@
+{
+  "name": "sensorySystemIntensification",
+  "icon": "moonfabric:cell_sense",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_sense",
+      "title": "sensorySystemEnhancement",
+      "text":"Right-click $(br2) in the dish to increase underwater digging speed and breathing time, depending on the number of evolutionary genes in the dish"
+    }
+  ]
+}

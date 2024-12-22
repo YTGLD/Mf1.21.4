@@ -1,0 +1,15 @@
+{
+  "name": "alkalineOxidation",
+  "icon": "moonfabric:cell_oxygen",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_oxygen",
+      "title": "alkalineOxidation",
+      "text":"Right-clicking $(br2) in a Petri dish increases the rate, and its effect depends on the number of genes that have evolved"
+    }
+  ]
+}

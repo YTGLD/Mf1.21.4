@@ -1,0 +1,15 @@
+{
+  "name": "cytochrome outbreaks",
+  "icon": "moonfabric:cell_big_boom",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_big_boom",
+      "title": "-cytochrome outbreaks-",
+      "text":"Right-click on the Potion Recovery Box with any plague item，Then right-click to get a chance to get $(br2) and right-click to deposit $(br2) in the petri dish to increase the speed of eating, the effect depends on the number of genes evolved"
+    }
+  ]
+}

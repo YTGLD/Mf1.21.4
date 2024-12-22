@@ -1,0 +1,15 @@
+{
+  "name": "liquefactionNecrosis",
+  "icon": "moonfabric:cell_necrosis",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_necrosis",
+      "title": "liquefiedNecrosis",
+      "text":"Right-click and deposit $(br2) into the dish to increase the healing speed, the effect depends on the number of evolutionary genes inside the dish"
+    }
+  ]
+}

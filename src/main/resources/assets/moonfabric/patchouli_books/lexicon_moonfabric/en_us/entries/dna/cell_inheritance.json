@@ -1,0 +1,15 @@
+{
+  "name": "mimicGenetics",
+  "icon": "moonfabric:cell_inheritance",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_inheritance",
+      "title": "-mimicGenetics-",
+      "text":"Right-click $(br2) in a Petri dish to increase damage resistance, the effect of which depends on the number of evolved genes"
+    }
+  ]
+}

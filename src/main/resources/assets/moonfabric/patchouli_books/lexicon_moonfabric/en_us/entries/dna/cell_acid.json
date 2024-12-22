@@ -1,0 +1,15 @@
+{
+  "name": "Acidic Liquid Backflow",
+  "icon": "moonfabric:cell_acid",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_acid",
+      "title": "-Acidic Liquid Backflow-",
+      "text":"This evolution gene can only be found inside ordinary/complex/extremely complex DNA sequence items $(br2) Right-click to deposit into a petri dish $(br2) Attacks will corrode the target's equipment, and the effect depends on the number of evolution genes inside the petri dish."
+    }
+  ]
+}

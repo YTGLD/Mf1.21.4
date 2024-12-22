@@ -1,0 +1,15 @@
+{
+  "name": "thermalDecompositionInhibition",
+  "icon": "moonfabric:cell_putrefactive",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_putrefactive",
+      "title": "thermalDecompositionInhibition",
+      "text":"Right-click $(br2) in the dish to reduce fire damage and burn time, depending on the number of evolutionary genes inside the dish"
+    }
+  ]
+}

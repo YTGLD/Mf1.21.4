@@ -1,0 +1,15 @@
+{
+  "name": "Greed Crystal",
+  "icon": "moonfabric:greedcrystal",
+  "category": "moonfabric:death",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:greedcrystal",
+      "title": "-Greed Crystal-",
+      "text": "Found in zombies $(br2) 1% chance, will not be obtained again while wearing this item."
+    }
+  ]
+}

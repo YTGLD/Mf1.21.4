@@ -1,0 +1,15 @@
+{
+  "name": "Alkaline hydrolysis",
+  "icon": "moonfabric:cell_break_down_water",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_break_down_water",
+      "title": "-Alkaline hydrolysis-",
+      "text":"Right-click $(br2) in the dish to increase swimming speed, the effect of which depends on the number of genes evolved"
+    }
+  ]
+}

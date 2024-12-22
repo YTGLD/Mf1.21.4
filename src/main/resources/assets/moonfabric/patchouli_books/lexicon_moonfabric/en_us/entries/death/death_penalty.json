@@ -1,0 +1,15 @@
+{
+  "name": "Torturer's Lantern",
+  "icon": "moonfabric:death_penalty",
+  "category": "moonfabric:death",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:death_penalty",
+      "title": "-Torturer's Lantern-",
+      "text": "Found in dungeons and piglin bastions $(br2) Killing entities generates lamp oil, which will automatically fly to the owner $(br) Picking it up heals 10% of health and grants 2 seconds of invincibility (stackable)."
+    }
+  ]
+}

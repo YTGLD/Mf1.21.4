@@ -1,0 +1,15 @@
+{
+  "name": "deadlyGeneCompression",
+  "icon": "moonfabric:cell_compress",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_compress",
+      "title": "-deadlyGeneCompression-",
+      "text":"Right-click and deposit $(br2) into the dish to reflect a certain amount of damage to the attacker, and its effect depends on the number of evolutionary genes inside the dish"
+    }
+  ]
+}

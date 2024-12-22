@@ -1,0 +1,15 @@
+{
+  "name": "CatalystSwitch",
+  "icon": "moonfabric:cell_off_on",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_off_on",
+      "title": "catalystSwitch",
+      "text":"Right-click and deposit $(br2) into a petri dish to increase damage, depending on the number of evolved genes"
+    }
+  ]
+}

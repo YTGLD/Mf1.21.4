@@ -1,0 +1,15 @@
+{
+  "name": "oceanAffinity",
+  "icon": "moonfabric:cell_in_water",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_in_water",
+      "title": "oceanAffinity",
+      "text":"Right-click $(br2) in a petri dish to increase the underwater movement rate, the effect of which depends on the number of genes evolved"
+    }
+  ]
+}

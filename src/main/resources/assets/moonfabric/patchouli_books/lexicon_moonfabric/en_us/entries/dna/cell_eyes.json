@@ -1,0 +1,15 @@
+{
+  "name": "cobraLocking",
+  "icon": "moonfabric:cell_eyes",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:cell_eyes",
+      "title": "-cobraLocking-",
+      "text":"Right-click $(br2) into the dish to cause nearby bioluminescence, the effect of which depends on the number of evolutionary genes inside the dish"
+    }
+  ]
+}

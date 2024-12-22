@@ -1,0 +1,15 @@
+{
+  "name": "Morris Block",
+  "icon": "moonfabric:mblock",
+  "category": "moonfabric:death",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:mblock",
+      "title": "-Morris Block-",
+      "text": "Found in zombies$(br2)1% chance, will not be obtained again while wearing this item."
+    }
+  ]
+}

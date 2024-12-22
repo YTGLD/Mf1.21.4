@@ -1,0 +1,15 @@
+{
+  "name": "ATP High Energy",
+  "icon": "moonfabric:atp_height",
+  "category": "moonfabric:dna",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:atp_height",
+      "title": "-ATP High Energy-",
+      "text": "Right-click the medicine recycling box with any plague item, and then hold the right mouse button to have a chance to obtain $(br2) Right-click to deposit into the petri dish $(br2) Every 4 ATP High Energies provide 2 maximum health points."
+    }
+  ]
+}

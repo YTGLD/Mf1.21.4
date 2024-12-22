@@ -1,0 +1,15 @@
+{
+  "name": "zombieVirus",
+  "icon": "moonfabric:necora",
+  "category": "moonfabric:necora",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:necora",
+      "title": "zombieVirus",
+      "text":"This virus only exists in chests in ancient cities, and only wearing it can obtain plague items (only in chests)$(br2)The chance of various DNA occurrences is 15%$(br)The probability of gene fragments is 35%"
+    }
+  ]
+}

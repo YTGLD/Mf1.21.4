@@ -1,0 +1,15 @@
+{
+  "name": "Gemini Skull",
+  "icon": "moonfabric:double_head",
+  "category": "moonfabric:death",
+  "priority": false,
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "spotlight",
+      "item": "moonfabric:double_head",
+      "title": "-Gemini Skull-",
+      "text": "Found in dungeons and bastions of piglins $(br2) Each attack has a 25% chance to summon two magic orbs, which deal damage equal to 10% of the owner's health plus 10% of the attack attribute.(br) They last up to 10 seconds and explode after disappearing."
+    }
+  ]
+}
