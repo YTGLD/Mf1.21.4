@@ -24,6 +24,18 @@ public class MRender extends RenderLayer {
         ShaderProgramKeys.getAll().add(shaderProgramKey);
         return shaderProgramKey;
     }
+    protected static final RenderPhase.Target O = new RenderPhase.Target("set", () -> {
+        if (MinecraftClient.getInstance().worldRenderer instanceof MFramebuffer framebuffer) {
+            Framebuffer target = framebuffer.defaultFramebufferSets();
+
+            if (target != null) {
+                target.copyDepthFrom(MinecraftClient.getInstance().getFramebuffer());
+                target.beginWrite(false);
+            }
+        }
+    }, () -> {
+        MinecraftClient.getInstance().getFramebuffer().beginWrite(false);
+    });
     public static final ShaderProgramKey BLOOD_PROGRAMKey = register("blood", VertexFormats.POSITION);
     public static final RenderPhase.ShaderProgram BLOOD_PROGRAM = new RenderPhase.ShaderProgram(BLOOD_PROGRAMKey);
 
@@ -39,14 +51,28 @@ public class MRender extends RenderLayer {
                                     false, false).add(Identifier.of(MoonFabricMod.MODID,"textures/gui/blood.png"),
                                     false, false).build()).build(false));
 
+    public static final RenderLayer BLOOD_OUTLINE =
+            of("blood",
+                    VertexFormats.POSITION,
+                    VertexFormat.DrawMode.QUADS,
+                    1536,
+                    false,
+                    true,
+                    RenderLayer.MultiPhaseParameters.builder()
+                            .program(BLOOD_PROGRAM)
+                            .target(O)
+                            .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
+                            .texture(Textures.create().add(Identifier.of(MoonFabricMod.MODID,"textures/gui/blood.png"),
+                                    true, false).add(Identifier.of(MoonFabricMod.MODID,"textures/gui/blood.png"),
+                                    true, false).build()).build(false));
 
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static RenderLayer getBlood() {
         return BLOOD;
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public static RenderLayer  getBloodOutLine() {
+    public static RenderLayer getBloodCommon() {
         return BLOOD;
     }
     ///=-
@@ -56,23 +82,21 @@ public class MRender extends RenderLayer {
     ///=-
     ///=-
 
-    public static final ShaderProgramKey BBLOOD_PROGRAMNIGeKey = register("nig", VertexFormats.POSITION);
+    public static final ShaderProgramKey BBLOOD_PROGRAMNIGeKey = register("nig_common", VertexFormats.POSITION);
     public static final RenderPhase.ShaderProgram BLOOD_PROGRAMNIG = new RenderPhase.ShaderProgram(BBLOOD_PROGRAMNIGeKey);
 
-    public static final RenderLayer BLOODNIG =of(
-            "nig",
-            VertexFormats.POSITION,
-            VertexFormat.DrawMode.QUADS,
-            256,
-            false,
-            true,
-            RenderLayer.MultiPhaseParameters.builder()
-                    .program(BLOOD_PROGRAMNIG)
-                    .writeMaskState(RenderPhase.COLOR_MASK)
-                    .transparency(LIGHTNING_TRANSPARENCY)
-                    .texture(Textures.create().add(Identifier.of(MoonFabricMod.MODID,"textures/gui/nig.png"),
-                            false, false).add(Identifier.of(MoonFabricMod.MODID,"textures/gui/nig.png"),
-                            false, false).build()).build(false));
+    public static final RenderLayer BLOODNIG =
+            of("blood",
+                    VertexFormats.POSITION,
+                    VertexFormat.DrawMode.QUADS,
+                    1536,
+                    false,
+                    false,
+                    RenderLayer.MultiPhaseParameters.builder()
+                            .program(BLOOD_PROGRAMNIG)
+                            .texture(Textures.create().add(Identifier.of(MoonFabricMod.MODID,"textures/gui/nig.png"),
+                                    false, false).add(Identifier.of(MoonFabricMod.MODID,"textures/gui/nig.png"),
+                                    false, false).build()).build(false));
 
 
 
@@ -81,7 +105,6 @@ public class MRender extends RenderLayer {
     }
 
     //--------------------------------------
-
 
 
     public static final ShaderProgramKey BBLOBLOOD_PROGRAM_commonAMNIGeKey = register("nig_common", VertexFormats.POSITION);
@@ -94,12 +117,14 @@ public class MRender extends RenderLayer {
                     VertexFormat.DrawMode.QUADS,
                     1536,
                     false,
-                    false,
+                    true,
                     RenderLayer.MultiPhaseParameters.builder()
                             .program(BLOOD_PROGRAM_common)
+                            .transparency(RenderPhase.TRANSLUCENT_TRANSPARENCY)
+                            .target(O)
                             .texture(Textures.create().add(Identifier.of(MoonFabricMod.MODID,"textures/gui/nig.png"),
-                                    false, false).add(Identifier.of(MoonFabricMod.MODID,"textures/gui/nig.png"),
-                                    false, false).build()).build(false));
+                                    true, false).add(Identifier.of(MoonFabricMod.MODID,"textures/gui/nig.png"),
+                                    true, false).build()).build(false));
 
 
     public static RenderLayer getBlood_common() {

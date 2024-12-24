@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/rotscale",
-    "fragment": "minecraft:post/spiderclip",
+    "vertex": "moonfabric:post/rotscale",
+    "fragment": "moonfabric:post/spiderclip",
     "samplers": [
         { "name": "InSampler" },
         { "name": "BlurSampler" }

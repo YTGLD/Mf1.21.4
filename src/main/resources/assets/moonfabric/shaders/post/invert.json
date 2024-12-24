@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/blit",
-    "fragment": "minecraft:post/invert",
+    "vertex": "moonfabric:post/blit",
+    "fragment": "moonfabric:post/invert",
     "samplers": [
         { "name": "InSampler" }
     ],

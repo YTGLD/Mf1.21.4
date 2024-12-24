@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/sobel",
-    "fragment": "minecraft:post/bits",
+    "vertex": "moonfabric:post/sobel",
+    "fragment": "moonfabric:post/bits",
     "samplers": [
         { "name": "InSampler" }
     ],

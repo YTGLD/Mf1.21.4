@@ -4,17 +4,24 @@
     },
     "passes": [
         {
-            "program": "minecraft:post/entity_outline",
+            "program": "moonfabric:post/entity_outline",
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "minecraft:entity_outline"
+                    "target": "moonfabric:entity_outline"
                 }
             ],
             "output": "swap"
         },
+
+
+
+
+
+
+
         {
-            "program": "minecraft:post/entity_outline_box_blur",
+            "program": "moonfabric:post/entity_outline_box_blur",
             "inputs": [
                 {
                     "sampler_name": "In",
@@ -22,7 +29,7 @@
                     "bilinear": true
                 }
             ],
-            "output": "minecraft:entity_outline",
+            "output": "moonfabric:entity_outline",
             "uniforms": [
                 {
                     "name": "BlurDir",
@@ -31,11 +38,11 @@
             ]
         },
         {
-            "program": "minecraft:post/entity_outline_box_blur",
+            "program": "moonfabric:post/entity_outline_box_blur",
             "inputs": [
                 {
                     "sampler_name": "In",
-                    "target": "minecraft:entity_outline",
+                    "target": "moonfabric:entity_outline",
                     "bilinear": true
                 }
             ],
@@ -47,15 +54,71 @@
                 }
             ]
         },
+
         {
-            "program": "minecraft:post/blit",
+            "program": "moonfabric:post/box_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap",
+                    "bilinear": true
+                }
+            ],
+            "output": "moonfabric:entity_outline",
+            "uniforms": [
+                {
+                    "name": "BlurDir",
+                    "values": [ 1.0, 0.0 ]
+                },
+                {
+                    "name": "RadiusMultiplier",
+                    "values": [ 10 ]
+                }
+            ]
+        },
+        {
+            "program": "moonfabric:post/box_blur",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "moonfabric:entity_outline",
+                    "bilinear": true
+                }
+            ],
+            "output": "swap",
+            "uniforms": [
+                {
+                    "name": "BlurDir",
+                    "values": [ 0.0, 1.0 ]
+                },
+                {
+                    "name": "RadiusMultiplier",
+                    "values": [ 10 ]
+                }
+
+            ]
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+        {
+            "program": "moonfabric:post/blit",
             "inputs": [
                 {
                     "sampler_name": "In",
                     "target": "swap"
                 }
             ],
-            "output": "minecraft:entity_outline"
+            "output": "moonfabric:entity_outline"
         }
     ]
 }

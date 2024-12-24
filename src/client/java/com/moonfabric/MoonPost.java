@@ -1,105 +1,61 @@
 package com.moonfabric;
 
+import com.google.gson.JsonSyntaxException;
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gl.Framebuffer;
 import net.minecraft.client.gl.PostEffectProcessor;
+import net.minecraft.client.gl.SimpleFramebuffer;
 import net.minecraft.client.render.DefaultFramebufferSet;
 import net.minecraft.client.render.FrameGraphBuilder;
+import net.minecraft.client.render.RenderPass;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-public class MoonPost {
+import java.io.IOException;
+import java.util.*;
 
+public class MoonPost {
 //
-//    private static final List<Identifier> registry = new ArrayList<>();
-//
-//    private static final Map<Identifier, PostEffect> postEffects = new HashMap<>();
+//    public static final Map<Identifier, MoonPost.PostEffect> postEffects = new HashMap<>();
 //
 //    public static void clear() {
-//        for(PostEffect postEffect : postEffects.values()){
+//
+//        for(MoonPost.PostEffect postEffect : postEffects.values()){
 //            postEffect.close();
 //        }
 //        postEffects.clear();
 //    }
 //
-//    public static void onInitializeOutline(MinecraftClient minecraft, FrameGraphBuilder frameGraphBuilder,
-//                                           int i ,
-//                                           int j, DefaultFramebufferSet framebufferSet, @Nullable Framebuffer entityOutlineFramebuffer) {
-//        registry.add(MoonFabricModClient.POST);
+//    public static void onInitializeOutline(MinecraftClient minecraft,Framebuffer mFramebuffer) {
 //        clear();
-//        for (Identifier resourceLocation : registry) {
-//            PostEffectProcessor postChain;
-//            Framebuffer renderTarget = entityOutlineFramebuffer;
-//            try {
-//                postChain = minecraft.getShaderLoader().loadPostEffect(resourceLocation, DefaultFramebufferSet.MAIN_AND_ENTITY_OUTLINE);
-//                if (postChain != null) {
-//                    postChain.render(frameGraphBuilder,i,j,framebufferSet);
-//                }
-//                if (DefaultFramebufferSets.entityOutlineFramebuffer!=null) {
-//                    renderTarget = DefaultFramebufferSets.entityOutlineFramebuffer.get();
-//                }
-//            } catch (Exception ee) {
-//                MoonFabricMod.LOGGER.error(String.valueOf(ee));
-//                postChain = null;
-//            }
-//            if (renderTarget!=null  ) {
-//                postEffects.put(resourceLocation, new PostEffect(postChain, renderTarget, false));
-//            }
+//        PostEffectProcessor postChain = minecraft.getShaderLoader().loadPostEffect(MoonFabricModClient.POST, Set.of(DefaultFramebufferSets.MAIN, DefaultFramebufferSets.ENTITY_OUTLINE));
+//
+//        postEffects.put(MoonFabricModClient.POST,
+//                new PostEffect(postChain, mFramebuffer, false));
+//    }
+//
+//    public static void rrr(Framebuffer mFramebuffer){
+//        if (mFramebuffer!=null) {
+//            mFramebuffer.setClearColor(0, 0, 0, 0);
+//            mFramebuffer.clear();
+//            mFramebuffer.beginWrite(false);
 //        }
 //    }
 //
-//
 //    public static void resize(int x, int y) {
-//        for (PostEffect postEffect : postEffects.values()) {
+//        for (MoonPost.PostEffect postEffect : postEffects.values()) {
 //            postEffect.setupDimensions(x, y);
 //        }
 //    }
 //
-//    public static void blitEffects(MinecraftClient minecraft) {
-//        RenderSystem.enableBlend();
-//        RenderSystem.enableDepthTest();
-//        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
-//        for (PostEffect postEffect : postEffects.values()) {
-//            if (postEffect.postChain != null && postEffect.isEnabled()) {
-//                postEffect.getFramebuffer().draw(minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight());
-//                postEffect.getFramebuffer().clear();
-//                minecraft.getFramebuffer().beginWrite(false);
-//                postEffect.setEnabled(false);
-//            }
-//        }
-//        RenderSystem.disableBlend();
-//        RenderSystem.defaultBlendFunc();
-//    }
-//
-//    public static void  clearAndBindWrite(Framebuffer mainTarget) {
-//        for (PostEffect postEffect : postEffects.values()) {
-//            if (postEffect.isEnabled() && postEffect.postChain != null) {
-//                postEffect.getFramebuffer().clear();
-//                mainTarget.beginWrite(false);
-//            }
-//        }
-//    }
-//
-//    public static void processEffects(FrameGraphBuilder frameGraphBuilder,
-//                                      int i ,
-//                                      int j, DefaultFramebufferSet framebufferSet ,
-//                                      Framebuffer mainTarget) {
-//        for (PostEffect postEffect : postEffects.values()) {
-//            if (postEffect.isEnabled() && postEffect.postChain != null) {
-//                postEffect.postChain.render(frameGraphBuilder,i,j,framebufferSet);
-//                mainTarget.beginWrite(false);
-//            }
-//        }
-//    }
 //    public static Framebuffer getFramebufferFor(Identifier resourceLocation) {
 //        MoonPost.PostEffect effect = postEffects.get(resourceLocation);
-//        return effect == null ? null : effect.getFramebuffer();
+//
+//        if (effect.getFramebuffer()!=null) {
+//            return effect.getFramebuffer();
+//        }else return null;
 //    }
 //
 //    public static void renderEffectForNextTick(Identifier resourceLocation) {
@@ -108,8 +64,37 @@ public class MoonPost {
 //            effect.setEnabled(true);
 //        }
 //    }
+//
+//    public static void blitEffects(MinecraftClient minecraft) {
+//        RenderSystem.enableBlend();
+//        RenderSystem.enableDepthTest();
+//        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+//
+//        for (MoonPost.PostEffect postEffect : postEffects.values()) {
+//            if (postEffect.getFramebuffer()!= null) {
+//                if (postEffect.postChain != null && postEffect.isEnabled()) {
+//                    postEffect.getFramebuffer().draw(minecraft.getWindow().getWidth(), minecraft.getWindow().getHeight());
+//                    postEffect.getFramebuffer().clear();
+//                    postEffect.setEnabled(false);
+//                }
+//            }
+//        }
+//        RenderSystem.disableBlend();
+//        RenderSystem.defaultBlendFunc();
+//    }
+//
+//    public static void clearAndBindWrite(Framebuffer mainTarget) {
+//        for (MoonPost.PostEffect postEffect : postEffects.values()) {
+//            if (postEffect.isEnabled() && postEffect.postChain != null&&postEffect.getFramebuffer()!=null) {
+//                postEffect.setClearColor();
+//                postEffect.getFramebuffer().clear();
+//                mainTarget.beginWrite(false);
+//            }
+//        }
+//    }
+//
 //    public static class PostEffect {
-//        private final PostEffectProcessor postChain;
+//        public final PostEffectProcessor postChain;
 //        private final Framebuffer renderTarget;
 //        private boolean enabled;
 //
@@ -133,13 +118,18 @@ public class MoonPost {
 //
 //        public void close() {
 //            if (renderTarget != null) {
-//                renderTarget.delete();
+//                renderTarget.clear();
 //            }
 //        }
 //
+//        public void setClearColor(){
+//            if (renderTarget != null) {
+//                renderTarget.setClearColor(0,0,0,0);
+//            }
+//        }
 //        public void setupDimensions(int x, int y) {
 //            if (renderTarget != null) {
-//                renderTarget.draw(x,y);
+//                renderTarget.resize(x, y);
 //            }
 //        }
 //    }

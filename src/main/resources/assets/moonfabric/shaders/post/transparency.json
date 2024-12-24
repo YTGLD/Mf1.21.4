@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/screenquad",
-    "fragment": "minecraft:post/transparency",
+    "vertex": "moonfabric:post/screenquad",
+    "fragment": "moonfabric:post/transparency",
     "samplers": [
         { "name": "MainSampler" },
         { "name": "MainDepthSampler" },

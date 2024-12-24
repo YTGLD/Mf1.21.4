@@ -5,9 +5,9 @@ import com.moonfabric.MRender;
 import com.moonfabric.item.Ms.TheNecoraIC;
 import com.moonfabric.item.Ms.nightmare;
 import net.minecraft.client.gui.DrawContext;
+import net.minecraft.client.gui.Element;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.HandledScreen;
-import net.minecraft.client.gui.screen.ingame.ScreenHandlerProvider;
+import net.minecraft.client.gui.screen.ingame.*;
 import net.minecraft.client.gui.tooltip.HoveredTooltipPositioner;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.gui.tooltip.TooltipPositioner;
@@ -36,12 +36,12 @@ import java.util.List;
 public abstract class HandledScreenMixin <T extends ScreenHandler> extends Screen implements ScreenHandlerProvider<T> {
 
     @Shadow
-    @Final
-    protected T handler;
-
-    @Shadow
     @Nullable
     protected Slot focusedSlot;
+
+    @Shadow protected abstract boolean isItemTooltipSticky(ItemStack item);
+
+    @Shadow @Final protected T handler;
 
     protected HandledScreenMixin(Text title) {
         super(title);
@@ -49,7 +49,7 @@ public abstract class HandledScreenMixin <T extends ScreenHandler> extends Scree
 
     @Inject(at = @At("RETURN"), method = "drawMouseoverTooltip")
     public void drawMouseoverTooltip(DrawContext context, int x, int y, CallbackInfo ci) {
-        if (context!=null && this.handler.getCursorStack().isEmpty() && this.focusedSlot != null && this.focusedSlot.hasStack()) {
+        if (context != null && this.focusedSlot != null && this.focusedSlot.hasStack()) {
             ItemStack itemStack = this.focusedSlot.getStack();
             if (this.client != null) {
                 List<Text> text = Screen.getTooltipFromItem(this.client, itemStack);
@@ -69,18 +69,19 @@ public abstract class HandledScreenMixin <T extends ScreenHandler> extends Scree
                     Vector2ic vector2ic = positioner.getPosition(context.getScaledWindowWidth(), context.getScaledWindowHeight(), x, y, i, j);
                     int n = vector2ic.x();
                     int o = vector2ic.y();
-                    if (context.getMatrices()!=null) {
+
+                    if (context.getMatrices() != null) {
                         if (itemStack.getItem() instanceof TheNecoraIC) {
                             context.getMatrices().push();
 
-                            render(MRender.BLOOD, context, n, o, i, j, 400);
+                            render(MRender.getBloodCommon(), context, n, o, i, j, 400);
 
                             context.getMatrices().pop();
                         }
                         if (itemStack.getItem() instanceof nightmare) {
                             context.getMatrices().push();
 
-                            render(MRender.BLOOD_common, context, n, o, i, j, 400);
+                            render(MRender.getBloodNIG(), context, n, o, i, j, 400);
 
                             context.getMatrices().pop();
                         }

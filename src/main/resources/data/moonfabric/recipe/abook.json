@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "moonfabric:ectoplasmball"
-    },
-    {
-      "item": "minecraft:book"
-    }
+    "moonfabric:ectoplasmball",
+    "minecraft:book"
   ],
   "result": {
     "id": "moonfabric:abook",

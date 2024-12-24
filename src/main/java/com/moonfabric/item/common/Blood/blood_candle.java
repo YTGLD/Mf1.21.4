@@ -36,28 +36,21 @@ public class blood_candle extends TheNecoraIC {
         builder.getSlotModifiers().put("legs/belt",new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),2, EntityAttributeModifier.Operation.ADD_VALUE));
     }
 
-
     @Override
     public void onEquip(ItemStack stack, SlotReference reference) {
+        stack.set(Data.CUSTOM_DATA,new NbtCompound());
+        if (!stack.get(Data.CUSTOM_DATA).getBoolean(bloods)){
+            if (reference.entity() instanceof PlayerEntity player) {
+                owner_blood owner_blood = new owner_blood(InItEntity.owner_blood, reference.entity().getEntityWorld());
+                owner_blood.setOwner(player);
+                owner_blood.setOwnerUuid(player.getUuid());
+                owner_blood.setPos(player.getX(),player.getY(),player.getZ());
 
-        if (stack.get(Data.CUSTOM_DATA)==null){
-            stack.set(Data.CUSTOM_DATA,new NbtCompound());
-        }
-        if (stack.get(Data.CUSTOM_DATA)!=null){
-            if (!stack.get(Data.CUSTOM_DATA).getBoolean(bloods)){
-                if (reference.entity() instanceof PlayerEntity player) {
-                    owner_blood owner_blood = new owner_blood(InItEntity.owner_blood, reference.entity().getEntityWorld());
-                    owner_blood.setOwner(player);
-                    owner_blood.setOwnerUuid(player.getUuid());
-                    owner_blood.setPos(player.getX(),player.getY(),player.getZ());
+                player.getWorld().spawnEntity(owner_blood);
 
-                    player.getWorld().spawnEntity(owner_blood);
-
-                    stack.get(Data.CUSTOM_DATA).putBoolean(bloods, true);
-                }
+                stack.get(Data.CUSTOM_DATA).putBoolean(bloods, true);
             }
-
-        }else stack.set(Data.CUSTOM_DATA,new NbtCompound());
+        }
     }
 
 

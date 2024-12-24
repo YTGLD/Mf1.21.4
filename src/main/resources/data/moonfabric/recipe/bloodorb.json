@@ -1,12 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "moonfabric:furybloodpearl"
-    },
-    {
-      "item": "moonfabric:bloodcharm"
-    }
+    "moonfabric:furybloodpearl",
+    "moonfabric:bloodcharm"
+
   ],
   "result": {
     "id": "moonfabric:bloodorb",

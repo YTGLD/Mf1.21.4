@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/sobel",
-    "fragment": "minecraft:post/color_convolve",
+    "vertex": "moonfabric:post/sobel",
+    "fragment": "moonfabric:post/color_convolve",
     "samplers": [
         { "name": "InSampler" }
     ],

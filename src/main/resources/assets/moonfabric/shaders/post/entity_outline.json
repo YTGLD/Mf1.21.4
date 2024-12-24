@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/sobel",
-    "fragment": "minecraft:post/entity_sobel",
+    "vertex": "moonfabric:post/sobel",
+    "fragment": "moonfabric:post/entity_sobel",
     "samplers": [
         { "name": "InSampler" }
     ],

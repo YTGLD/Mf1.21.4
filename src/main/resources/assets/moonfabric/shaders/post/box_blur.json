@@ -1,6 +1,6 @@
 {
-    "vertex": "minecraft:post/blur",
-    "fragment": "minecraft:post/box_blur",
+    "vertex": "moonfabric:post/blur",
+    "fragment": "moonfabric:post/box_blur",
     "samplers": [
         { "name": "InSampler" }
     ],

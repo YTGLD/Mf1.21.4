@@ -4,8 +4,8 @@
         "srcrgb": "one",
         "dstrgb": "zero"
     },
-    "vertex": "minecraft:post/blur",
-    "fragment": "minecraft:post/entity_outline_box_blur",
+    "vertex": "moonfabric:post/blur",
+    "fragment": "moonfabric:post/entity_outline_box_blur",
     "samplers": [
         { "name": "InSampler" }
     ],

@@ -187,13 +187,13 @@ public class moonfabricLoot {
                             .apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.03f)))));
 
 
-            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.05f)))));
-            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_attack_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.05f)))));
-            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_earth).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.05f)))));
-            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_boom_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.05f)))));
-            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_vex).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.05f)))));
-            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_effect_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.05f)))));
-            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_speed_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.05f)))));
+            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.025f)))));
+            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_attack_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.025f)))));
+            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_earth).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.025f)))));
+            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_boom_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.025f)))));
+            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_vex).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.025f)))));
+            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_effect_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.025f)))));
+            supplier.pool(LootPool.builder().bonusRolls(ConstantLootNumberProvider.create(1.0f)).with(ItemEntry.builder(init.owner_blood_speed_eye).apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.025f)))));
 
 
         }

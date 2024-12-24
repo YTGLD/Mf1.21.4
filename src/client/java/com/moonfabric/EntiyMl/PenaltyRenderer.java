@@ -1,6 +1,5 @@
 package com.moonfabric.EntiyMl;
 
-import com.moonfabric.Entity.owner_blood;
 import com.moonfabric.Entity.penalty;
 import com.moonfabric.Handler;
 import com.moonfabric.MRender;
@@ -30,7 +29,6 @@ public class PenaltyRenderer <T extends penalty> extends EntityRenderer<T,Living
     @Override
     public void render(LivingEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         getBloodOutLine(matrices,vertexConsumers,240,0.18f);
-        renderSphere1(matrices,vertexConsumers,240,0.15f);
         if (state instanceof LivingEntityRenderStateExtension e){
             if (e.getEntity() instanceof penalty t) {
                 setT(matrices, t, vertexConsumers);
@@ -64,9 +62,44 @@ public class PenaltyRenderer <T extends penalty> extends EntityRenderer<T,Living
     }
 
     public void getBloodOutLine(@NotNull MatrixStack matrices, @NotNull VertexConsumerProvider vertexConsumers, int light, float s) {
+        {
+            int stacks = 20; // 垂直方向的分割数
+            int slices = 20; // 水平方向的分割数
+            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.BLOOD_OUTLINE);
+            for (int i = 0; i < stacks; ++i) {
+                float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);
+                float phi1 = (float) Math.PI * ((i + 1) / (float) stacks);
+
+                for (int j = 0; j < slices; ++j) {
+                    float theta0 = (float) (2 * Math.PI) * ((j + 0) / (float) slices);
+                    float theta1 = (float) (2 * Math.PI) * ((j + 1) / (float) slices);
+
+                    float x0 = s * (float) Math.sin(phi0) * (float) Math.cos(theta0);
+                    float y0 = s * (float) Math.cos(phi0);
+                    float z0 = s * (float) Math.sin(phi0) * (float) Math.sin(theta0);
+
+                    float x1 = s * (float) Math.sin(phi0) * (float) Math.cos(theta1);
+                    float y1 = s * (float) Math.cos(phi0);
+                    float z1 = s * (float) Math.sin(phi0) * (float) Math.sin(theta1);
+
+                    float x2 = s * (float) Math.sin(phi1) * (float) Math.cos(theta1);
+                    float y2 = s * (float) Math.cos(phi1);
+                    float z2 = s * (float) Math.sin(phi1) * (float) Math.sin(theta1);
+
+                    float x3 = s * (float) Math.sin(phi1) * (float) Math.cos(theta0);
+                    float y3 = s * (float) Math.cos(phi1);
+                    float z3 = s * (float) Math.sin(phi1) * (float) Math.sin(theta0);
+
+                    vertexConsumer.vertex(matrices.peek().getPositionMatrix(), x0, y0, z0).color(1.0f, 1.0f, 1.0f, 1.0f).overlay(OverlayTexture.DEFAULT_UV).light(light, light).normal(1, 0, 0);
+                    vertexConsumer.vertex(matrices.peek().getPositionMatrix(), x1, y1, z1).color(1.0f, 1.0f, 1.0f, 1.0f).overlay(OverlayTexture.DEFAULT_UV).light(light, light).normal(1, 0, 0);
+                    vertexConsumer.vertex(matrices.peek().getPositionMatrix(), x2, y2, z2).color(1.0f, 1.0f, 1.0f, 1.0f).overlay(OverlayTexture.DEFAULT_UV).light(light, light).normal(1, 0, 0);
+                    vertexConsumer.vertex(matrices.peek().getPositionMatrix(), x3, y3, z3).color(1.0f, 1.0f, 1.0f, 1.0f).overlay(OverlayTexture.DEFAULT_UV).light(light, light).normal(1, 0, 0);
+                }
+            }
+        }
         int stacks = 20; // 垂直方向的分割数
         int slices = 20; // 水平方向的分割数
-        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.getBloodOutLine());
+        VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.getBloodCommon());
         for (int i = 0; i < stacks; ++i) {
             float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);
             float phi1 = (float) Math.PI * ((i + 1) / (float) stacks);

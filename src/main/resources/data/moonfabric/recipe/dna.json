@@ -1,12 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "moonfabric:ectoplasmprism"
-    },
-    {
-      "item": "minecraft:glass"
-    }
+    "moonfabric:ectoplasmprism",
+    "minecraft:glass"
   ],
   "result": {
     "id": "moonfabric:dna",

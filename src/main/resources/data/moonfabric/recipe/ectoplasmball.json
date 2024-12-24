@@ -1,12 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "moonfabric:ectoplasmball"
-    },
-    {
-      "item": "moonfabric:ectoplasmball"
-    }
+    "moonfabric:ectoplasmball",
+    "moonfabric:ectoplasmball"
+
   ],
   "result": {
     "id": "moonfabric:ectoplasmcloub",

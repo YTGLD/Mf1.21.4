@@ -9,10 +9,20 @@ import org.jetbrains.annotations.Nullable;
 
 public class DefaultFramebufferSets
         implements PostEffectProcessor.FramebufferSet {
-    public static Handle<Framebuffer> entityOutlineFramebuffer;
-    public static Handle<Framebuffer> mainFramebuffer = Handle.empty();
+
+    public  Handle<Framebuffer> entityOutlineFramebuffer;
+    public  Handle<Framebuffer> mainFramebuffer = Handle.empty();
     public static final Identifier MAIN =Identifier.of(MoonFabricMod.MODID,"moonfabric");
     public static final Identifier ENTITY_OUTLINE = Identifier.of(MoonFabricMod.MODID,"entity_outline");
+    @Override
+    public Handle<Framebuffer> getOrThrow(Identifier id) {
+        if (id .equals(ENTITY_OUTLINE) ) {
+            return entityOutlineFramebuffer;
+        }else if (id.equals(MAIN)){
+            return mainFramebuffer;
+        }
+        return null;
+    }
 
     @Override
     public void set(Identifier id, Handle<Framebuffer> framebuffer) {
@@ -28,11 +38,15 @@ public class DefaultFramebufferSets
     @Nullable
     @Override
     public Handle<Framebuffer> get(Identifier id) {
-        if (id == ENTITY_OUTLINE) {
+        if (id .equals(ENTITY_OUTLINE) ) {
             return entityOutlineFramebuffer;
-        }else if (id==MAIN){
+        }else if (id.equals(MAIN)){
            return mainFramebuffer;
         }
-        return entityOutlineFramebuffer;
+        return null;
+    }
+    public void clear() {
+        this.mainFramebuffer = Handle.empty();
+        this.entityOutlineFramebuffer = null;
     }
 }

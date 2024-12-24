@@ -1,12 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
-    {
-      "item": "moonfabric:ectoplasmprism"
-    },
-    {
-      "item": "minecraft:ender_eye"
-    }
+    "moonfabric:ectoplasmprism",
+    "minecraft:ender_eye"
+
   ],
   "result": {
     "id": "moonfabric:nightmareeye",
