@@ -16,4 +16,5 @@ public class PlayerMixin {
         cir.setReturnValue(cir.getReturnValue().add(AttReg.cit,1));
         cir.setReturnValue(cir.getReturnValue().add(AttReg.swiming,1));
     }
+
 }

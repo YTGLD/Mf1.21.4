@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/root",
+  "criteria": {
+    "rageapple": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:rageapple"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "I'm angry "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:rageapple"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "rage apple"
+    }
+  },
+  "requirements": [
+    [
+      "rageapple"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

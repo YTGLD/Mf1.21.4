@@ -45,7 +45,7 @@ public class woodcottoncandy extends CottonCandy{
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(AttReg.heal, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID+this.getTranslationKey()), 1, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(AttReg.heal, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID+this.getTranslationKey()), 1, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 
 

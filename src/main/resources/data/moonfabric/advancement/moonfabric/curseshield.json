@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/doomcharm",
+  "criteria": {
+    "curseshield": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:curseshield"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "curse shield"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:curseshield"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "curse shield"
+    }
+  },
+  "requirements": [
+    [
+      "curseshield"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

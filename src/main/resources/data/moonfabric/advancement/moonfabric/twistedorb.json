@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/candle",
+  "criteria": {
+    "twistedorb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:twistedorb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Look at me "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:twistedorb"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "twisted orb"
+    }
+  },
+  "requirements": [
+    [
+      "twistedorb"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

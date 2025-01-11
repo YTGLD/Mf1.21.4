@@ -28,7 +28,7 @@ public class pain_stone  extends ItemTir {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(EntityAttributes.JUMP_STRENGTH,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.42, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        builder.addExclusive(EntityAttributes.SAFE_FALL_DISTANCE,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.5, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.JUMP_STRENGTH,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.42, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.SAFE_FALL_DISTANCE,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.5, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 }

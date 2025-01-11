@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/doomcharm",
+  "criteria": {
+    "curseeye": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:curseeye"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "the eye"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:curseeye"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "curse eye"
+    }
+  },
+  "requirements": [
+    [
+      "curseeye"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

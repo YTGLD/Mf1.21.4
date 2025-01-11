@@ -6,6 +6,8 @@ import com.moonfabric.init.InItEntity;
 import com.moonfabric.item.Ms.TheNecoraIC;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
 import io.wispforest.accessories.api.slot.SlotReference;
+import io.wispforest.accessories.api.slot.SlotType;
+import io.wispforest.accessories.menu.ArmorSlotTypes;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -13,6 +15,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -32,24 +35,28 @@ public class blood_candle extends TheNecoraIC {
     }
 
     @Override
-    public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.getSlotModifiers().put("legs/belt",new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),2, EntityAttributeModifier.Operation.ADD_VALUE));
+    public void getDynamicModifiers(ItemStack stack, SlotReference reference, @NotNull AccessoryAttributeBuilder builder) {
+        builder.getSlotModifiers().put("belt",
+                new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),2, EntityAttributeModifier.Operation.ADD_VALUE));
     }
 
     @Override
-    public void onEquip(ItemStack stack, SlotReference reference) {
-        stack.set(Data.CUSTOM_DATA,new NbtCompound());
-        if (!stack.get(Data.CUSTOM_DATA).getBoolean(bloods)){
+    public void tick(ItemStack stack, SlotReference reference) {
+        if (stack.get(Data.CUSTOM_DATA) == null) {
+            stack.set(Data.CUSTOM_DATA, new NbtCompound());
+        }
+        if (!stack.get(Data.CUSTOM_DATA).getBoolean(bloods)) {
             if (reference.entity() instanceof PlayerEntity player) {
                 owner_blood owner_blood = new owner_blood(InItEntity.owner_blood, reference.entity().getEntityWorld());
                 owner_blood.setOwner(player);
                 owner_blood.setOwnerUuid(player.getUuid());
-                owner_blood.setPos(player.getX(),player.getY(),player.getZ());
+                owner_blood.setPos(player.getX(), player.getY(), player.getZ());
 
                 player.getWorld().spawnEntity(owner_blood);
 
                 stack.get(Data.CUSTOM_DATA).putBoolean(bloods, true);
             }
+
         }
     }
 

@@ -22,7 +22,7 @@ import java.util.List;
 
 public class TheNecoraIC  extends AccessoryItem {
     public TheNecoraIC(Item.Settings settings) {
-        super(settings);
+        super(settings.maxCount(1));
     }
     @Override
     public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType type) {
@@ -55,13 +55,7 @@ public class TheNecoraIC  extends AccessoryItem {
         }
     }
 
-    @Override
-    public boolean canEquip(ItemStack stack, SlotReference reference) {
-        if (reference.entity() instanceof PlayerEntity player){
-            return !HasCurio.has(this, player);
-        }
-        return true;
-    }
+    
 
     @Override
     public DropRule getDropRule(ItemStack stack, SlotReference reference, DamageSource source) {

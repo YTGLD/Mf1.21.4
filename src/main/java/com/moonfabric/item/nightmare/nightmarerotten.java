@@ -51,6 +51,7 @@ public class nightmarerotten extends nightmare {
 
     @Override
     public void onUnequip(ItemStack stack, SlotReference reference) {
+        super.onUnequip(stack,reference);
         reference.entity().getAttributes().removeModifiers(this.getModifiers(reference.entity()));
     }
 

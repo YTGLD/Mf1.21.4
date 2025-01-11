@@ -16,10 +16,10 @@ public class ectoplasmbattery extends ectoplasm {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(EntityAttributes.MAX_HEALTH, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 10, EntityAttributeModifier.Operation.ADD_VALUE));
-        builder.addExclusive(EntityAttributes.ARMOR, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 4, EntityAttributeModifier.Operation.ADD_VALUE));
-        builder.addExclusive(EntityAttributes.MOVEMENT_SPEED, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 0.05, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        builder.addExclusive(EntityAttributes.ATTACK_SPEED, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 0.05, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.MAX_HEALTH, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 10, EntityAttributeModifier.Operation.ADD_VALUE));
+        builder.addStackable(EntityAttributes.ARMOR, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 4, EntityAttributeModifier.Operation.ADD_VALUE));
+        builder.addStackable(EntityAttributes.MOVEMENT_SPEED, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 0.05, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.ATTACK_SPEED, new EntityAttributeModifier(Identifier.of(MoonFabricMod.MODID,this.getTranslationKey()), 0.05, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 
 }

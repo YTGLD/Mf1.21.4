@@ -12,6 +12,9 @@ import com.moonfabric.init.InItEntity;
 import com.moonfabric.init.init;
 import com.moonfabric.item.common.CurseOrDoom.fissionreactor;
 import com.moonfabric.item.common.Mise.goldbox;
+import io.wispforest.accessories.api.AccessoriesCapability;
+import io.wispforest.accessories.api.AccessoriesContainer;
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
@@ -49,6 +52,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin {
@@ -139,126 +143,136 @@ public abstract class LivingEntityMixin {
             if (HasCurio.has(init.bloodtime, player)){
                 player.timeUntilRegen = (int) (player.timeUntilRegen * 1.3);
             }
+            AccessoriesCapability capability = AccessoriesCapability.get(player);
+            if (capability!=null){
+                if (HasCurio.has(init.nanocottoncandy, player)) {
+                    for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                        AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                        ExpandedSimpleContainer accessories = container.getAccessories();
+                        for (int i = 0; i < accessories.size(); ++i) {
+                            ItemStack stack = accessories.getStack(i);
+                            if (!stack.isEmpty()) {
+                                if (stack.isOf(init.nanocottoncandy)) {
+                                    if (!player.getItemCooldownManager().isCoolingDown(stack)) {
+                                        if (MathHelper.nextInt(Random.create(), 0, 100) <= cotton_candy) {
+                                            cotton_candy /= 2;
+                                            cir.setReturnValue((float) 0);
+                                            player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WITHER_BREAK_BLOCK, SoundCategory.NEUTRAL, 0.5f, 0.5f);
+                                        } else {
+                                            cotton_candy = 100;
+                                            if (player.getWorld() instanceof ServerWorld world) {
+                                                world.spawnParticles(MoonFabricMod.Origin, player.getX(), player.getY(), player.getZ(), 30, 2, 2, 2, 0.1);
+                                            }
+                                            player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WARDEN_DEATH, SoundCategory.NEUTRAL, 0.15f, 0.15f);
+                                            cir.setReturnValue(amount * 1.5F);
+                                            player.getItemCooldownManager().set(init.nanocottoncandy.getDefaultStack(), 200);
 
-            ItemStack itemStack = HasCurio.getItemStack(player);
-
-            if (HasCurio.has(init.nanocottoncandy, player)) {
-
-                if (itemStack.isOf(init.nanocottoncandy)) {
-                    if (!player.getItemCooldownManager().isCoolingDown(itemStack)) {
-                        if (MathHelper.nextInt(Random.create(), 0, 100) <= cotton_candy) {
-                            cotton_candy /= 2;
-                            cir.setReturnValue((float) 0);
-                            player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WITHER_BREAK_BLOCK, SoundCategory.NEUTRAL, 0.5f, 0.5f);
-                        } else {
-                            cotton_candy = 100;
-                            if (player.getWorld() instanceof ServerWorld world) {
-                                world.spawnParticles(MoonFabricMod.Origin, player.getX(), player.getY(), player.getZ(), 30, 2, 2, 2, 0.1);
+                                        }
+                                    }
+                                }
                             }
-                            player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_WARDEN_DEATH, SoundCategory.NEUTRAL, 0.15f, 0.15f);
-                            cir.setReturnValue(amount * 1.5F);
-                            player.getItemCooldownManager().set(init.nanocottoncandy.getDefaultStack(), 200);
+                        }
+                    }
 
+
+                }
+                if (HasCurio.has(init.nanocube, player)) {
+                    if (this.beamTicks < this.getWarmupTime()) {
+                        ++this.beamTicks;
+                    }
+                    if (source != null && source.getSource() instanceof LivingEntity living) {
+                        double d = this.getBeamProgress(0.0F);
+                        double e = living.getX() - player.getX();
+                        double f = living.getBodyY(0.5) - player.getEyeY();
+                        double g = living.getZ() - player.getZ();
+                        double h = Math.sqrt(e * e + f * f + g * g);
+                        e /= h;
+                        f /= h;
+                        g /= h;
+                        double j = player.getRandom().nextDouble();
+                        while (j < h) {
+                            j += 1.8 - d + player.getRandom().nextDouble() * (1.7 - d);
+
+                            if (player.getWorld() instanceof ServerWorld serverWorld) {
+                                serverWorld.spawnParticles(MoonFabricMod.FOLLOW, player.getX() + e * j, player.getEyeY() + f * j, player.getZ() + g * j, 4, 0, 0, 0, 0);
+                                living.getWorld().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, SoundCategory.NEUTRAL, 0.15f, 0.15f);
+
+                                living.serverDamage(living.getDamageSources().magic(), 8);
+                                living.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 50, 1));
+                                living.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 50, 1));
+                                living.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 50, 1));
+                                living.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 150, 1));
+
+                            }
                         }
                     }
                 }
 
-            }
-            if (HasCurio.has(init.nanocube, player)) {
-                if (this.beamTicks < this.getWarmupTime()) {
-                    ++this.beamTicks;
-                }
-                if (source != null && source.getSource() instanceof LivingEntity living) {
-                    double d = this.getBeamProgress(0.0F);
-                    double e = living.getX() - player.getX();
-                    double f = living.getBodyY(0.5) - player.getEyeY();
-                    double g = living.getZ() - player.getZ();
-                    double h = Math.sqrt(e * e + f * f + g * g);
-                    e /= h;
-                    f /= h;
-                    g /= h;
-                    double j = player.getRandom().nextDouble();
-                    while (j < h) {
-                        j += 1.8 - d + player.getRandom().nextDouble() * (1.7 - d);
 
-                        if (player.getWorld() instanceof ServerWorld serverWorld) {
-                            serverWorld.spawnParticles(MoonFabricMod.FOLLOW, player.getX() + e * j, player.getEyeY() + f * j, player.getZ() + g * j, 4, 0, 0, 0, 0);
-                            living.getWorld().playSound(null, living.getX(), living.getY(), living.getZ(), SoundEvents.ENTITY_ELDER_GUARDIAN_CURSE, SoundCategory.NEUTRAL, 0.15f, 0.15f);
+                if (HasCurio.has(init.glodstone,player)){
+                    if (amount > (player.getMaxHealth() / 2)){
+                        cir.setReturnValue(amount * 0.2f);
+                        player.heal(4);
+                    }
 
+                    if (MathHelper.nextInt(Random.create(), 1, 5) == 1) {
+                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 100, 1));
+                        player.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 100, 1));
+
+                        if (source != null && source.getSource() != null && source.getSource() instanceof LivingEntity living) {
                             living.serverDamage(living.getDamageSources().magic(), 8);
-                            living.addStatusEffect(new StatusEffectInstance(StatusEffects.WEAKNESS, 50, 1));
-                            living.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, 50, 1));
-                            living.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, 50, 1));
-                            living.addStatusEffect(new StatusEffectInstance(StatusEffects.GLOWING, 150, 1));
-
                         }
                     }
                 }
-            }
-
-
-            if (HasCurio.has(init.glodstone,player)){
-                if (amount > (player.getMaxHealth() / 2)){
-                    cir.setReturnValue(amount * 0.2f);
-                    player.heal(4);
-                }
-
-                if (MathHelper.nextInt(Random.create(), 1, 5) == 1) {
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.RESISTANCE, 100, 1));
-                    player.addStatusEffect(new StatusEffectInstance(StatusEffects.ABSORPTION, 100, 1));
-
-                    if (source != null && source.getSource() != null && source.getSource() instanceof LivingEntity living) {
-                        living.serverDamage(living.getDamageSources().magic(), 8);
+                if (HasCurio.has(init.gazer,player)){
+                    if (amount > (player.getMaxHealth() / 3)){
+                        cir.setReturnValue(amount * 0.3f);
                     }
                 }
-            }
-            if (HasCurio.has(init.gazer,player)){
-                if (amount > (player.getMaxHealth() / 3)){
-                    cir.setReturnValue(amount * 0.3f);
-                }
-            }
 
-            if (HasCurio.has(init.furybloodpearl,player)){
-                cir.setReturnValue((amount * 1.6f) + 1);
-                if (MathHelper.nextInt(Random.create(), 1 ,10) == 1){
-                    player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.NEUTRAL,1.5F,1.5F);
-                    player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.BLOCK_BEACON_AMBIENT, SoundCategory.NEUTRAL,1.5F,1.5F);
-                    player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.BLOCK_BEACON_POWER_SELECT, SoundCategory.NEUTRAL,1.5F,1.5F);
-                    if (player.getWorld() instanceof ServerWorld serverWorld) {
-                        serverWorld.spawnParticles(MoonFabricMod.Origin, player.getX(), player.getY(), player.getZ(), 33, 1, 1, 1, 0.1);
-                    }
-                    Vec3d vec3d = player.getPos();
-                    int r = 12;
-                    List<LivingEntity> list = player.getEntityWorld().getEntitiesByClass(LivingEntity.class,new Box(vec3d.x + r,vec3d.y + r,vec3d.z + r,vec3d.x - r,vec3d.y - r,vec3d.z - r), EntityPredicates.EXCEPT_SPECTATOR);
-                    for (LivingEntity living : list) {
-                        if (living != player) {
+                if (HasCurio.has(init.furybloodpearl,player)){
+                    cir.setReturnValue((amount * 1.6f) + 1);
+                    if (MathHelper.nextInt(Random.create(), 1 ,10) == 1){
+                        player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.BLOCK_BEACON_ACTIVATE, SoundCategory.NEUTRAL,1.5F,1.5F);
+                        player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.BLOCK_BEACON_AMBIENT, SoundCategory.NEUTRAL,1.5F,1.5F);
+                        player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.BLOCK_BEACON_POWER_SELECT, SoundCategory.NEUTRAL,1.5F,1.5F);
+                        if (player.getWorld() instanceof ServerWorld serverWorld) {
+                            serverWorld.spawnParticles(MoonFabricMod.Origin, player.getX(), player.getY(), player.getZ(), 33, 1, 1, 1, 0.1);
+                        }
+                        Vec3d vec3d = player.getPos();
+                        int r = 12;
+                        List<LivingEntity> list = player.getEntityWorld().getEntitiesByClass(LivingEntity.class,new Box(vec3d.x + r,vec3d.y + r,vec3d.z + r,vec3d.x - r,vec3d.y - r,vec3d.z - r), EntityPredicates.EXCEPT_SPECTATOR);
+                        for (LivingEntity living : list) {
+                            if (living != player) {
 
-                            living.serverDamage(living.getDamageSources().magic(), living.getMaxHealth() / 5);
+                                living.serverDamage(living.getDamageSources().magic(), living.getMaxHealth() / 5);
 
+                            }
                         }
                     }
                 }
-            }
-            if (HasCurio.has(init.bloodcharm,player)){
+                if (HasCurio.has(init.bloodcharm,player)){
 
-                if (amount > (player.getMaxHealth() / 2)){
-                    player.getItemCooldownManager().set(init.bloodcharm.getDefaultStack(), 200);
-                    player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.ENTITY_WARDEN_DEATH, SoundCategory.NEUTRAL,1.5F,1.5F);
-                    if (player.getWorld() instanceof ServerWorld world){
-                        world.spawnParticles(MoonFabricMod.t,player.getX(), player.getY(),player.getZ(),20,2,2,2,0.1);
-                        world.spawnParticles(MoonFabricMod.FOLLOW,player.getX(), player.getY(),player.getZ(),20,2,2,2,0.1);
+                    if (amount > (player.getMaxHealth() / 2)){
+                        player.getItemCooldownManager().set(init.bloodcharm.getDefaultStack(), 200);
+                        player.getWorld().playSound(null,player.getX(), player.getY(),player.getZ(), SoundEvents.ENTITY_WARDEN_DEATH, SoundCategory.NEUTRAL,1.5F,1.5F);
+                        if (player.getWorld() instanceof ServerWorld world){
+                            world.spawnParticles(MoonFabricMod.t,player.getX(), player.getY(),player.getZ(),20,2,2,2,0.1);
+                            world.spawnParticles(MoonFabricMod.FOLLOW,player.getX(), player.getY(),player.getZ(),20,2,2,2,0.1);
+                        }
+
+                    }
+
+                    if (player.getItemCooldownManager().isCoolingDown(init.bloodcharm.getDefaultStack())){
+                        cir.setReturnValue(amount * 0.7f);
+                    }else {
+                        cir.setReturnValue(amount * 1.4f);
                     }
 
                 }
-
-                if (player.getItemCooldownManager().isCoolingDown(init.bloodcharm.getDefaultStack())){
-                    cir.setReturnValue(amount * 0.7f);
-                }else {
-                    cir.setReturnValue(amount * 1.4f);
-                }
-
             }
-        }
+            }
+
 
 //__________________________________________________________________________________________________________________
 
@@ -273,7 +287,6 @@ public abstract class LivingEntityMixin {
 
         if (livingEntity instanceof PlayerEntity player){
 
-            ItemStack itemStack = HasCurio.getItemStack(player);
 
             if (HasCurio.has(init.watercottoncandy, player)) {
                 if (!player.getItemCooldownManager().isCoolingDown(init.watercottoncandy.getDefaultStack())) {
@@ -342,7 +355,100 @@ public abstract class LivingEntityMixin {
         }
 
         if (source.getAttacker() instanceof PlayerEntity player){
-            ItemStack itemStack = HasCurio.getItemStack(player);
+            AccessoriesCapability capability = AccessoriesCapability.get(player);
+            for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                ExpandedSimpleContainer accessories = container.getAccessories();
+                for (int i = 0; i < accessories.size(); ++i) {
+                    ItemStack stack = accessories.getStack(i);
+                    if (!stack.isEmpty()) {
+                        if (HasCurio.has(init.firecottoncandy, player)) {
+                            if (!player.getItemCooldownManager().isCoolingDown(init.firecottoncandy.getDefaultStack())) {
+                                //攻击禁用目标的 海洋棉花糖，并额外造成50%的伤害
+                                if (livingEntity instanceof PlayerEntity playerEntity) {
+                                    if (stack.isOf(init.goldcottoncandy)) {
+                                        playerEntity.getItemCooldownManager().set(init.goldcottoncandy.getDefaultStack(), 100);
+                                        cir.setReturnValue(cir.getReturnValue() * 1.5f);
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                }
+                for (int i = 0; i < accessories.size(); ++i) {
+                    ItemStack stack = accessories.getStack(i);
+                    if (!stack.isEmpty()) {
+                        if (HasCurio.has(init.stonecottoncandy, player)) {
+                            if (!player.getItemCooldownManager().isCoolingDown(init.stonecottoncandy.getDefaultStack())) {
+                                //攻击禁用目标的 海洋棉花糖，并额外造成50%的伤害
+                                if (livingEntity instanceof PlayerEntity playerEntity) {
+                                    if (stack.isOf(init.watercottoncandy)) {
+                                        playerEntity.getItemCooldownManager().set(init.watercottoncandy.getDefaultStack(), 100);
+                                        cir.setReturnValue(cir.getReturnValue() * 1.5f);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < accessories.size(); ++i) {
+                    ItemStack stack = accessories.getStack(i);
+                    if (!stack.isEmpty()) {
+                        if (HasCurio.has(init.woodcottoncandy, player)) {
+                            if (!player.getItemCooldownManager().isCoolingDown(init.woodcottoncandy.getDefaultStack())) {
+                                //攻击禁用目标的 石头棉花糖，并额外造成50%的伤害
+                                if (livingEntity instanceof PlayerEntity playerEntity) {
+                                    if (stack.isOf(init.stonecottoncandy)) {
+                                        playerEntity.getItemCooldownManager().set(init.stonecottoncandy.getDefaultStack(), 100);
+                                        cir.setReturnValue(cir.getReturnValue() * 1.5f);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < accessories.size(); ++i) {
+                    ItemStack stack = accessories.getStack(i);
+                    if (!stack.isEmpty()) {
+                        if (HasCurio.has(init.watercottoncandy, player)) {
+                            if (!player.getItemCooldownManager().isCoolingDown(init.watercottoncandy.getDefaultStack())) {
+                                //攻击禁用目标的 火焰棉花糖，并额外造成50%的伤害
+                                if (livingEntity instanceof PlayerEntity playerEntity) {
+                                    if (stack.isOf(init.firecottoncandy)) {
+                                        playerEntity.getItemCooldownManager().set(init.firecottoncandy.getDefaultStack(), 100);
+                                        cir.setReturnValue(cir.getReturnValue() * 1.5f);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < accessories.size(); ++i) {
+                    ItemStack stack = accessories.getStack(i);
+                    if (!stack.isEmpty()) {
+                        if (HasCurio.has(init.goldcottoncandy, player)){
+                            if (!player.getItemCooldownManager().isCoolingDown(init.goldcottoncandy.getDefaultStack())) {
+                                //攻击禁用目标的 木头棉花糖，并额外造成50%的伤害
+                                if (livingEntity instanceof PlayerEntity playerEntity) {
+                                    if (stack.isOf(init.woodcottoncandy)) {
+                                        playerEntity.getItemCooldownManager().set(init.woodcottoncandy.getDefaultStack(), 100);
+                                        cir.setReturnValue(cir.getReturnValue() * 1.5f);
+                                    }
+                                }
+                            }
+
+                            //金·棉花糖 ：  使用斧头作为武器时：+80%攻击伤害
+                            if (!player.getItemCooldownManager().isCoolingDown(init.goldcottoncandy.getDefaultStack())) {
+                                if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof AxeItem) {
+                                    cir.setReturnValue(cir.getReturnValue() * 1.8f);
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
             if (HasCurio.has(init.firecottoncandy, player)) {
                 if (!player.getItemCooldownManager().isCoolingDown(init.firecottoncandy.getDefaultStack())) {
                     if  (player.isInLava()) {
@@ -376,71 +482,13 @@ public abstract class LivingEntityMixin {
                     }
                 }
             }
-            if (HasCurio.has(init.firecottoncandy, player)) {
-                if (!player.getItemCooldownManager().isCoolingDown(init.firecottoncandy.getDefaultStack())) {
-                    //攻击禁用目标的 海洋棉花糖，并额外造成50%的伤害
-                    if (livingEntity instanceof PlayerEntity playerEntity) {
-                        if (itemStack.isOf(init.goldcottoncandy)) {
-                            playerEntity.getItemCooldownManager().set(init.goldcottoncandy.getDefaultStack(), 100);
-                            cir.setReturnValue(cir.getReturnValue() * 1.5f);
-                        }
-                    }
-                }
-            }
 
-            if (HasCurio.has(init.stonecottoncandy, player)) {
-                if (!player.getItemCooldownManager().isCoolingDown(init.stonecottoncandy.getDefaultStack())) {
-                    //攻击禁用目标的 海洋棉花糖，并额外造成50%的伤害
-                    if (livingEntity instanceof PlayerEntity playerEntity) {
-                        if (itemStack.isOf(init.watercottoncandy)) {
-                            playerEntity.getItemCooldownManager().set(init.watercottoncandy.getDefaultStack(), 100);
-                            cir.setReturnValue(cir.getReturnValue() * 1.5f);
-                        }
-                    }
-                }
-            }
-            if (HasCurio.has(init.woodcottoncandy, player)) {
-                if (!player.getItemCooldownManager().isCoolingDown(init.woodcottoncandy.getDefaultStack())) {
-                    //攻击禁用目标的 石头棉花糖，并额外造成50%的伤害
-                    if (livingEntity instanceof PlayerEntity playerEntity) {
-                        if (itemStack.isOf(init.stonecottoncandy)) {
-                            playerEntity.getItemCooldownManager().set(init.stonecottoncandy.getDefaultStack(), 100);
-                            cir.setReturnValue(cir.getReturnValue() * 1.5f);
-                        }
-                    }
-                }
-            }
-            if (HasCurio.has(init.watercottoncandy, player)) {
-                if (!player.getItemCooldownManager().isCoolingDown(init.watercottoncandy.getDefaultStack())) {
-                    //攻击禁用目标的 火焰棉花糖，并额外造成50%的伤害
-                    if (livingEntity instanceof PlayerEntity playerEntity) {
-                        if (itemStack.isOf(init.firecottoncandy)) {
-                            playerEntity.getItemCooldownManager().set(init.firecottoncandy.getDefaultStack(), 100);
-                            cir.setReturnValue(cir.getReturnValue() * 1.5f);
-                        }
-                    }
-                }
-            }
 
-            if (HasCurio.has(init.goldcottoncandy, player)){
-                if (!player.getItemCooldownManager().isCoolingDown(init.goldcottoncandy.getDefaultStack())) {
-                    //攻击禁用目标的 木头棉花糖，并额外造成50%的伤害
-                    if (livingEntity instanceof PlayerEntity playerEntity) {
-                        if (itemStack.isOf(init.woodcottoncandy)) {
-                            playerEntity.getItemCooldownManager().set(init.woodcottoncandy.getDefaultStack(), 100);
-                            cir.setReturnValue(cir.getReturnValue() * 1.5f);
-                        }
-                    }
-                }
 
-                //金·棉花糖 ：  使用斧头作为武器时：+80%攻击伤害
-                if (!player.getItemCooldownManager().isCoolingDown(init.goldcottoncandy.getDefaultStack())) {
-                    if (player.getStackInHand(Hand.MAIN_HAND).getItem() instanceof AxeItem) {
-                        cir.setReturnValue(cir.getReturnValue() * 1.8f);
-                    }
-                }
 
-            }
+
+
+
 
 
             float aaaaa = accc(player);
@@ -461,17 +509,31 @@ public abstract class LivingEntityMixin {
     @Unique
     private float accc(PlayerEntity player){
         int a = 0;
-        ItemStack itemStack = HasCurio.getItemStack(player);
-        List<ItemStack> stacks = new ArrayList<>();
-        if (itemStack.isEmpty()) {
-            stacks.add(itemStack);
+        AccessoriesCapability capability = AccessoriesCapability.get(player);
+        if (capability == null) {
+            return 0;
         }
-        for (ItemStack stack : stacks){
-            if (stack.isEmpty()){
-                a += 1;
+
+        for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+            AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+            ExpandedSimpleContainer accessories = container.getAccessories();
+            for (int i = 0; i < accessories.size(); ++i) {
+                ItemStack stack = accessories.getStack(i);
+                if (!stack.isEmpty()) {
+                    List<ItemStack> stacks = new ArrayList<>();
+                    if (stack.isEmpty()) {
+                        stacks.add(stack);
+                    }
+                    for (ItemStack stackss : stacks){
+                        if (stackss.isEmpty()){
+                            a += 1;
+                        }
+                    }
+                    return a;
+                }
             }
         }
-        return a;
+        return 0;
     }
     @Inject(method = "canWalkOnFluid", at = @At(value = "RETURN"), cancellable = true)
     private void mf$canWalkOnFluid(FluidState state, CallbackInfoReturnable<Boolean> cir) {
@@ -523,19 +585,51 @@ public abstract class LivingEntityMixin {
             }
         }
         if (entity instanceof PlayerEntity player) {
-            ItemStack itemStack = HasCurio.getItemStack(player);
+
+            AccessoriesCapability capability = AccessoriesCapability.get(player);
+            if (capability != null) {
+                for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                    AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                    ExpandedSimpleContainer accessories = container.getAccessories();
+                    for (int i = 0; i < accessories.size(); ++i) {
+                        ItemStack stack = accessories.getStack(i);
+                        if (!stack.isEmpty()) {
+                            if (HasCurio.has(init.fissionreactor, player)) {
+                                if (stack.isOf(init.fissionreactor)) {
+                                    if (stack.get(Data.CUSTOM_DATA)!=null) {
+                                        if (stack.get(Data.CUSTOM_DATA).getInt(fissionreactor.fission) <= 1000) {
+                                            stack.get(Data.CUSTOM_DATA).putInt(fissionreactor.fission,
+                                                    stack.get(Data.CUSTOM_DATA).getInt(fissionreactor.fission) + 10);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+                    }
+
+                    for (int i = 0; i < accessories.size(); ++i) {
+                        ItemStack stack = accessories.getStack(i);
+                        if (!stack.isEmpty()) {
+                            if (HasCurio.has(init.goldbox, player)){
+                                LivingEntity livingEntity = (LivingEntity) (Object) this;
+                                if (stack.isOf(init.goldbox)){
+                                    if (stack.get(Data.CUSTOM_DATA)!= null) {
+                                        if (stack.get(Data.CUSTOM_DATA).getInt(goldbox.gold) <= 1000) {
+                                            stack.get(Data.CUSTOM_DATA).putInt(goldbox.gold,
+                                                    (int) (stack.get(Data.CUSTOM_DATA).getInt(goldbox.gold) + livingEntity.getMaxHealth()));
+                                        }
+                                    }
+                                }
 
 
-            if (HasCurio.has(init.fissionreactor, player)) {
-                if (itemStack.isOf(init.fissionreactor)) {
-                    if (itemStack.get(Data.CUSTOM_DATA)!=null) {
-                        if (itemStack.get(Data.CUSTOM_DATA).getInt(fissionreactor.fission) <= 1000) {
-                            itemStack.get(Data.CUSTOM_DATA).putInt(fissionreactor.fission,
-                                    itemStack.get(Data.CUSTOM_DATA).getInt(fissionreactor.fission) + 10);
+                            }
                         }
                     }
                 }
             }
+
+
 
             if (HasCurio.has(init.twistedorb, player)){
                 LivingEntity living = (LivingEntity) (Object) this;
@@ -549,19 +643,7 @@ public abstract class LivingEntityMixin {
 
 
 
-            if (HasCurio.has(init.goldbox, player)){
-                LivingEntity livingEntity = (LivingEntity) (Object) this;
-                if (itemStack.isOf(init.goldbox)){
-                    if (itemStack.get(Data.CUSTOM_DATA)!= null) {
-                        if (itemStack.get(Data.CUSTOM_DATA).getInt(goldbox.gold) <= 1000) {
-                            itemStack.get(Data.CUSTOM_DATA).putInt(goldbox.gold,
-                                    (int) (itemStack.get(Data.CUSTOM_DATA).getInt(goldbox.gold) + livingEntity.getMaxHealth()));
-                        }
-                    }
-                }
 
-
-            }
         }
     }
     @Unique

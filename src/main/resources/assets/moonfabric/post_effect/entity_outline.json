@@ -13,13 +13,6 @@
             ],
             "output": "swap"
         },
-
-
-
-
-
-
-
         {
             "program": "moonfabric:post/entity_outline_box_blur",
             "inputs": [
@@ -54,7 +47,6 @@
                 }
             ]
         },
-
         {
             "program": "moonfabric:post/box_blur",
             "inputs": [
@@ -72,7 +64,7 @@
                 },
                 {
                     "name": "RadiusMultiplier",
-                    "values": [ 10 ]
+                    "values": [ 12 ]
                 }
             ]
         },
@@ -93,23 +85,46 @@
                 },
                 {
                     "name": "RadiusMultiplier",
-                    "values": [ 10 ]
+                    "values": [ 12 ]
                 }
 
             ]
         },
 
+        {
+            "program": "moonfabric:post/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "swap"
+                }
+            ],
+            "output": "moonfabric:entity_outline",
+            "uniforms": [
+                {
+                    "name": "ColorModulate",
+                    "values": [ 5,5,5,2.5 ]
+                }
+            ]
+        },
 
 
-
-
-
-
-
-
-
-
-
+        {
+            "program": "moonfabric:post/blit",
+            "inputs": [
+                {
+                    "sampler_name": "In",
+                    "target": "moonfabric:entity_outline"
+                }
+            ],
+            "output": "swap",
+            "uniforms": [
+                {
+                    "name": "ColorModulate",
+                    "values": [ 5,5,5,2.5 ]
+                }
+            ]
+        },
         {
             "program": "moonfabric:post/blit",
             "inputs": [

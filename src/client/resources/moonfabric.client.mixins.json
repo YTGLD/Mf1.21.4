@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "DrawContextMixin",
+    "GameRendererMixin",
     "HandledScreenMixin",
     "LivingEntityRendererMixin",
     "RenderLayersMixin",

@@ -9,6 +9,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.*;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -42,7 +43,10 @@ public class owner_blood extends TameableEntity {
     public boolean isInvulnerable() {
         return true;
     }
-
+    @Override
+    public boolean isInvulnerableTo(ServerWorld world, DamageSource source) {
+        return true;
+    }
     private final List<Vec3d> trailPositions = new ArrayList<>();
     public List<Vec3d> getTrailPositions() {
         return trailPositions;
@@ -188,7 +192,7 @@ public class owner_blood extends TameableEntity {
                     attack_blood attackBlood = new attack_blood(InItEntity.attack_blood, this.getEntityWorld());
                     if (HasCurio.has(init.owner_blood_speed_eye, player)) {
                         attackBlood.setCannotFollow(false);
-                        attackBlood.setSpeed(attackBlood.getSpeeds() * 4);
+                        attackBlood.setSpeed(attackBlood.getSpeeds() * 10);
                     }
                     if (HasCurio.has(init.owner_blood_attack_eye, player)) {
                         attackBlood.setDamage(attackBlood.getDamages() * 1.2f);

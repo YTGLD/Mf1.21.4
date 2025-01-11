@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/cube",
+  "criteria": {
+    "watercottoncandy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:watercottoncandy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "I am greater than fire "
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:watercottoncandy"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "water cotton candy"
+    }
+  },
+  "requirements": [
+    [
+      "watercottoncandy"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

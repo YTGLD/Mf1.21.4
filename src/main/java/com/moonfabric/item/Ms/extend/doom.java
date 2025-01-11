@@ -14,13 +14,7 @@ public class doom extends AccessoryItem {
     public doom(Settings settings) {
         super(settings.maxCount(1));
     }
-    @Override
-    public boolean canEquip(ItemStack stack, SlotReference reference) {
-        if (reference.entity() instanceof PlayerEntity player){
-            return !HasCurio.has(this, player);
-        }
-        return true;
-    }
+
 
 
     @Override

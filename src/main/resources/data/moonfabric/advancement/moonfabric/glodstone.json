@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/origincube",
+  "criteria": {
+    "glodstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:glodstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "§6Primitive..... "
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:glodstone"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "§6Primitive coat of arms"
+    }
+  },
+  "requirements": [
+    [
+      "glodstone"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

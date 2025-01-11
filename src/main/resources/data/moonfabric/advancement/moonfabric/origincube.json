@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/root",
+  "criteria": {
+    "origincube": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:origincube"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "The Mysterious Magic Cube of the Creator"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:origincube"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "origin cube"
+    }
+  },
+  "requirements": [
+    [
+      "origincube"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -5,6 +5,7 @@ import com.moonfabric.MoonFabricMod;
 import com.moonfabric.init.InItEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.mob.MobEntity;
@@ -43,7 +44,6 @@ public class attack_blood extends TameableEntity {
 
     }
 
-
     public List<Vec3d> getTrailPositions() {
         return trailPositions;
     }
@@ -52,6 +52,9 @@ public class attack_blood extends TameableEntity {
     @Override
     public void tick() {
         super.tick();
+        if (!this.getEntityWorld().getBlockState(this.getBlockPos()).isAir()){
+            this.discard();
+        }
         this.setNoGravity(true);
         Vec3d playerPos = this.getPos().add(0, 0.75, 0);
         int range = 1;
@@ -120,7 +123,7 @@ public class attack_blood extends TameableEntity {
                     this.setVelocity(direction.x * (speeds + s), direction.y * (speeds + s), direction.z * (speeds + s));
                 }
             }else {
-                if (this.age < 5) {
+                if (this.age < 50) {
                     Vec3d targetPos = getTarget().getPos().add(0, 0.5, 0);
                     Vec3d currentPos = this.getPos();
                     Vec3d direction = targetPos.subtract(currentPos).normalize();
@@ -206,6 +209,11 @@ public class attack_blood extends TameableEntity {
 
     @Override
     public boolean isInvulnerable() {
+        return true;
+    }
+
+    @Override
+    public boolean isInvulnerableTo(ServerWorld world, DamageSource source) {
         return true;
     }
 

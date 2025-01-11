@@ -8,8 +8,11 @@ import com.moonfabric.init.AttReg;
 import com.moonfabric.init.DNAItems;
 import com.moonfabric.init.Data;
 import com.moonfabric.init.init;
+import io.wispforest.accessories.api.AccessoriesCapability;
+import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.api.AccessoryItem;
 import io.wispforest.accessories.api.slot.SlotReference;
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
@@ -44,6 +47,7 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
+import java.util.Map;
 
 public class dna extends AccessoryItem {
     public dna(Settings settings) {
@@ -53,41 +57,65 @@ public class dna extends AccessoryItem {
     public  static void Stater(LivingEntity  me ,ItemStack useStack,CallbackInfoReturnable<Integer> cir ){
         LivingEntity player =me;
         if (HasCurio.has(init.dna, player)) {
-            ItemStack stack = HasCurio.getItemStack(player);
-
-            if (stack.getItem() == (init.dna)){
-                BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
-                if (bundlecontents != null) {
-                    bundlecontents.iterate().forEach((itemStack -> {
-                        if (itemStack.isOf(DNAItems.cell_big_boom)) {
-                            int count = itemStack.getCount();
-                            if (useStack.getUseAction() == UseAction.EAT){
-                                cir.setReturnValue((int) (cir.getReturnValue() * (1 - (count/100f))));
+            AccessoriesCapability capability = AccessoriesCapability.get(player);
+            if (capability != null) {
+                for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                    AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                    ExpandedSimpleContainer accessories = container.getAccessories();
+                    for (int i = 0; i < accessories.size(); ++i) {
+                        ItemStack stack = accessories.getStack(i);
+                        if (!stack.isEmpty()) {
+                            if (stack.getItem() == (init.dna)){
+                                BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
+                                if (bundlecontents != null) {
+                                    bundlecontents.iterate().forEach((itemStack -> {
+                                        if (itemStack.isOf(DNAItems.cell_big_boom)) {
+                                            int count = itemStack.getCount();
+                                            if (useStack.getUseAction() == UseAction.EAT){
+                                                cir.setReturnValue((int) (cir.getReturnValue() * (1 - (count/100f))));
+                                            }
+                                        }
+                                    }));
+                                }
                             }
                         }
-                    }));
+                    }
                 }
             }
+
+
+
         }
     }
     public  static void Finish(LivingEntity  me ,ItemStack useStack){
         LivingEntity kl = me;
         if (kl instanceof PlayerEntity player) {
-            ItemStack stack = HasCurio.getItemStack(player);
-            if (HasCurio.has(init.dna, player)) {
-                if (stack.getItem() == (init.dna)) {
-                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
-                    if (bundlecontents != null) {
-                        bundlecontents.iterate().forEach((itemStack -> {
-                            if (itemStack.isOf(DNAItems.cell_digestion)) {
+            AccessoriesCapability capability = AccessoriesCapability.get(player);
+            if (capability != null) {
+                for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                    AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                    ExpandedSimpleContainer accessories = container.getAccessories();
+                    for (int i = 0; i < accessories.size(); ++i) {
+                        ItemStack stack = accessories.getStack(i);
+                        if (!stack.isEmpty()) {
+                            if (HasCurio.has(init.dna, player)) {
+                                if (stack.getItem() == (init.dna)) {
+                                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
+                                    if (bundlecontents != null) {
+                                        bundlecontents.iterate().forEach((itemStack -> {
+                                            if (itemStack.isOf(DNAItems.cell_digestion)) {
 
-                                int count = itemStack.getCount();
-                                if (useStack.getUseAction() == UseAction.EAT) {
-                                    player.getHungerManager().setFoodLevel(player.getHungerManager().getFoodLevel() + count / 10);
-                                    player.getHungerManager().setSaturationLevel(player.getHungerManager().getSaturationLevel() + count / 10f);
+                                                int count = itemStack.getCount();
+                                                if (useStack.getUseAction() == UseAction.EAT) {
+                                                    player.getHungerManager().setFoodLevel(player.getHungerManager().getFoodLevel() + count / 10);
+                                                    player.getHungerManager().setSaturationLevel(player.getHungerManager().getSaturationLevel() + count / 10f);
+                                                }
+                                            }
+                                        }));
+                                    }
                                 }
                             }
-                        }));
+                        }
                     }
                 }
             }
@@ -96,81 +124,106 @@ public class dna extends AccessoryItem {
     public  static void hurt(DamageSource source, LivingEntity me, CallbackInfoReturnable<Float> cir){
         Entity p = me;
         if (p instanceof PlayerEntity player) {
-            if (HasCurio.has(init.dna, player)) {
-                ItemStack stack = HasCurio.getItemStack(player);
-                if (stack.getItem() == (init.dna)){
-                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
-                    if (bundlecontents != null) {
-                        bundlecontents.iterate().forEach((itemStack -> {
-                            if (itemStack.isOf(DNAItems.cell_inheritance)) {
-                                float s = itemStack.getCount();//64
-                                s/=100f;//0.64
-                                s/=3.2f;//0.2
-                                cir.setReturnValue(cir.getReturnValue()*(1-s));
-                            }
-                            if (itemStack.isOf(DNAItems.cell_cranial)) {
-                                float s = itemStack.getCount();//64
-                                s/=100f;//0.64
-                                if (source.isOf(DamageTypes.FALLING_ANVIL)
-                                        && source.isOf(DamageTypes.FALLING_STALACTITE)
-                                        && source.isOf(DamageTypes.FALLING_BLOCK)
-                                        && source.isOf(DamageTypes.MOB_PROJECTILE))
-                                {
-                                    cir.setReturnValue(cir.getReturnValue()*(1-s));
-                                }
-                            }
 
-                            if (itemStack.isOf(DNAItems.cell_compress)) {
-                                float s = itemStack.getCount();//64
-                                s/=100f;//0.64
-                                if (source.getSource() instanceof LivingEntity living){
-                                    float dam = cir.getReturnValue() * s;
+            AccessoriesCapability capability = AccessoriesCapability.get(player);
+            if (capability != null) {
+                for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                    AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                    ExpandedSimpleContainer accessories = container.getAccessories();
+                    for (int i = 0; i < accessories.size(); ++i) {
+                        ItemStack stack = accessories.getStack(i);
+                        if (!stack.isEmpty()) {
+                            if (HasCurio.has(init.dna, player)) {
+                                if (stack.getItem() == (init.dna)){
+                                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
+                                    if (bundlecontents != null) {
+                                        bundlecontents.iterate().forEach((itemStack -> {
+                                            if (itemStack.isOf(DNAItems.cell_inheritance)) {
+                                                float s = itemStack.getCount();//64
+                                                s/=100f;//0.64
+                                                s/=3.2f;//0.2
+                                                cir.setReturnValue(cir.getReturnValue()*(1-s));
+                                            }
+                                            if (itemStack.isOf(DNAItems.cell_cranial)) {
+                                                float s = itemStack.getCount();//64
+                                                s/=100f;//0.64
+                                                if (source.isOf(DamageTypes.FALLING_ANVIL)
+                                                        && source.isOf(DamageTypes.FALLING_STALACTITE)
+                                                        && source.isOf(DamageTypes.FALLING_BLOCK)
+                                                        && source.isOf(DamageTypes.MOB_PROJECTILE))
+                                                {
+                                                    cir.setReturnValue(cir.getReturnValue()*(1-s));
+                                                }
+                                            }
 
+                                            if (itemStack.isOf(DNAItems.cell_compress)) {
+                                                float s = itemStack.getCount();//64
+                                                s/=100f;//0.64
+                                                if (source.getSource() instanceof LivingEntity living){
+                                                    float dam = cir.getReturnValue() * s;
+
+                                                }
+                                            }
+                                            if (itemStack.isOf(DNAItems.cell_constant)) {
+                                                if (!player.getItemCooldownManager().isCoolingDown(DNAItems.cell_constant.getDefaultStack())) {
+                                                    float s = itemStack.getCount();//64
+                                                    s /= 100f;//0.64
+                                                    player.timeUntilRegen = player.timeUntilRegen + ((int) (player.timeUntilRegen * s));
+                                                    player.getItemCooldownManager().set(DNAItems.cell_constant.getDefaultStack(), player.timeUntilRegen);
+                                                }
+                                            }
+                                        }));
+                                    }
                                 }
                             }
-                            if (itemStack.isOf(DNAItems.cell_constant)) {
-                                if (!player.getItemCooldownManager().isCoolingDown(DNAItems.cell_constant.getDefaultStack())) {
-                                    float s = itemStack.getCount();//64
-                                    s /= 100f;//0.64
-                                    player.timeUntilRegen = player.timeUntilRegen + ((int) (player.timeUntilRegen * s));
-                                    player.getItemCooldownManager().set(DNAItems.cell_constant.getDefaultStack(), player.timeUntilRegen);
-                                }
-                            }
-                        }));
+                        }
                     }
                 }
             }
+
         }
         if (source.getSource() instanceof PlayerEntity player) {
             if (HasCurio.has(init.dna, player)) {
-                ItemStack stack = HasCurio.getItemStack(player);
-                if (stack.getItem() == (init.dna)){
-                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
-                    if (bundlecontents != null) {
-                        bundlecontents.iterate().forEach((itemStack -> {
-                            if (itemStack.isOf(DNAItems.cell_acid)) {
-                                int count = itemStack.getCount();//64
-                                ItemStack head = me.getEquippedStack(EquipmentSlot.HEAD);
-                                if (!head.isEmpty()&&head.getMaxDamage()!=0){
-                                    head.damage(count, me,EquipmentSlot.HEAD);
-                                }
+                AccessoriesCapability capability = AccessoriesCapability.get(player);
+                if (capability != null) {
+                    for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                        AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                        ExpandedSimpleContainer accessories = container.getAccessories();
+                        for (int i = 0; i < accessories.size(); ++i) {
+                            ItemStack stack = accessories.getStack(i);
+                            if (!stack.isEmpty()) {
+                                if (stack.getItem() == (init.dna)) {
+                                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
+                                    if (bundlecontents != null) {
+                                        bundlecontents.iterate().forEach((itemStack -> {
+                                            if (itemStack.isOf(DNAItems.cell_acid)) {
+                                                int count = itemStack.getCount();//64
+                                                ItemStack head = me.getEquippedStack(EquipmentSlot.HEAD);
+                                                if (!head.isEmpty() && head.getMaxDamage() != 0) {
+                                                    head.damage(count, me, EquipmentSlot.HEAD);
+                                                }
 
-                                ItemStack CHEST = me.getEquippedStack(EquipmentSlot.CHEST);
-                                if (!CHEST.isEmpty()&&CHEST.getMaxDamage()!=0){
-                                    CHEST.damage(count, me,EquipmentSlot.CHEST);
-                                }
-                                ItemStack LEGS = me.getEquippedStack(EquipmentSlot.LEGS);
-                                if (!LEGS.isEmpty()&&LEGS.getMaxDamage()!=0){
-                                    LEGS.damage(count, me,EquipmentSlot.LEGS);
-                                }
-                                ItemStack FEET = me.getEquippedStack(EquipmentSlot.FEET);
-                                if (!FEET.isEmpty()&&FEET.getMaxDamage()!=0){
-                                    FEET.damage(count,me,EquipmentSlot.HEAD);
+                                                ItemStack CHEST = me.getEquippedStack(EquipmentSlot.CHEST);
+                                                if (!CHEST.isEmpty() && CHEST.getMaxDamage() != 0) {
+                                                    CHEST.damage(count, me, EquipmentSlot.CHEST);
+                                                }
+                                                ItemStack LEGS = me.getEquippedStack(EquipmentSlot.LEGS);
+                                                if (!LEGS.isEmpty() && LEGS.getMaxDamage() != 0) {
+                                                    LEGS.damage(count, me, EquipmentSlot.LEGS);
+                                                }
+                                                ItemStack FEET = me.getEquippedStack(EquipmentSlot.FEET);
+                                                if (!FEET.isEmpty() && FEET.getMaxDamage() != 0) {
+                                                    FEET.damage(count, me, EquipmentSlot.HEAD);
+                                                }
+                                            }
+                                        }));
+                                    }
                                 }
                             }
-                        }));
+                        }
                     }
                 }
+
             }
         }
     }
@@ -178,26 +231,38 @@ public class dna extends AccessoryItem {
         Entity p = source.getSource();
         if (p instanceof PlayerEntity player) {
             if (HasCurio.has(init.dna, player)) {
-                ItemStack stack = HasCurio.getItemStack(player);
-                if (stack.getItem() == (init.dna)){
-                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
-                    if (bundlecontents != null) {
-                        bundlecontents.iterate().forEach((itemStack -> {
-                            if (itemStack.isOf(DNAItems.cell_darwin)) {
-                                float count = itemStack.getCount();
-                                if (MathHelper.nextInt(Random.create(),1,2)==1){
-                                    player.heal(count/8);
-                                }else {
+                AccessoriesCapability capability = AccessoriesCapability.get(player);
+                if (capability != null) {
+                    for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                        AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                        ExpandedSimpleContainer accessories = container.getAccessories();
+                        for (int i = 0; i < accessories.size(); ++i) {
+                            ItemStack stack = accessories.getStack(i);
+                            if (!stack.isEmpty()) {
+                                if (stack.getItem() == (init.dna)) {
+                                    BundleContentsComponent bundlecontents = stack.get(Data.BUNDLE_CONTENTS);
+                                    if (bundlecontents != null) {
+                                        bundlecontents.iterate().forEach((itemStack -> {
+                                            if (itemStack.isOf(DNAItems.cell_darwin)) {
+                                                float count = itemStack.getCount();
+                                                if (MathHelper.nextInt(Random.create(), 1, 2) == 1) {
+                                                    player.heal(count / 8);
+                                                } else {
 
+                                                }
+                                            }
+                                            if (itemStack.isOf(DNAItems.cell_god)) {
+                                                float count = itemStack.getCount();
+                                                player.heal(count / 32);
+                                            }
+                                        }));
+                                    }
                                 }
                             }
-                            if (itemStack.isOf(DNAItems.cell_god)) {
-                                float count = itemStack.getCount();
-                                player.heal(count/32);
-                            }
-                        }));
+                        }
                     }
                 }
+
             }
         }
     }

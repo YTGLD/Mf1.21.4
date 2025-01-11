@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/blackhead",
+  "criteria": {
+    "firehead": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:firehead"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Is this the price of flames?"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:firehead"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "fire head"
+    }
+  },
+  "requirements": [
+    [
+      "firehead"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

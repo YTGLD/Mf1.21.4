@@ -1,6 +1,7 @@
 package com.moonfabric.mixin;
 
 import com.moonfabric.Ievent.AllEvent;
+import com.moonfabric.Ievent.AdvancementEvt;
 import com.moonfabric.init.DNAItems;
 import com.moonfabric.init.LootTableEvent;
 import com.moonfabric.init.init;
@@ -8,6 +9,7 @@ import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.random.Random;
@@ -42,6 +44,13 @@ public abstract class LootTableMixin {
                     this.randomSequenceId.get().toString().contains("stronghold")||
                     this.randomSequenceId.get().toString().contains("village")||
                     this.randomSequenceId.get().toString().contains("mineshaft")){
+
+                AdvancementEvt.addLoot(cir.getReturnValue(),context.get(LootContextParameters.THIS_ENTITY),10);
+                AdvancementEvt.nightmare_base_reversal_mysteriousLOOT(cir.getReturnValue(),context.get(LootContextParameters.THIS_ENTITY));
+                AdvancementEvt.nightmare_base_start_pod(cir.getReturnValue(),context.get(LootContextParameters.THIS_ENTITY));
+
+
+
 
                 objectArrayList.add(LootTableEvent.addLootDNA(context,List.of(
                         DNAItems.atp_height,

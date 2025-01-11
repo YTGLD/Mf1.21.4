@@ -18,9 +18,9 @@ public class bloodorb extends TheNecoraIC {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(EntityAttributes.MAX_ABSORPTION,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.4, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
-        builder.addExclusive(EntityAttributes.ARMOR,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),10, EntityAttributeModifier.Operation.ADD_VALUE));
-        builder.addExclusive(AttReg.heal,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),1.25, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.MAX_ABSORPTION,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.4, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.ARMOR,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),10, EntityAttributeModifier.Operation.ADD_VALUE));
+        builder.addStackable(AttReg.heal,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),1.25, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
 
     }
 

@@ -42,7 +42,6 @@ public class ectoplasmstar extends ectoplasm {
 
     public Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> att(){
         Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> modifierMultimap = HashMultimap.create();
-        UUID uuid = UUID.fromString("00000000-0000-3005-998f-50309b7cf9e8");
         modifierMultimap.put(EntityAttributes. LUCK, new EntityAttributeModifier(Identifier.of("ectoplasmstar"), 0.2, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         return modifierMultimap;
     }

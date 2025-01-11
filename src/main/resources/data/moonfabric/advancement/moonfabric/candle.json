@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/goldbox",
+  "criteria": {
+    "candle": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:candle"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Blow it out "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:candle"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "candle"
+    }
+  },
+  "requirements": [
+    [
+      "candle"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

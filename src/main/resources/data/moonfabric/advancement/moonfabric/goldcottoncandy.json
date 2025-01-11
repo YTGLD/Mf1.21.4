@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/cube",
+  "criteria": {
+    "goldcottoncandy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:goldcottoncandy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "I am greater than wood "
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:goldcottoncandy"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "gold cotton candy"
+    }
+  },
+  "requirements": [
+    [
+      "goldcottoncandy"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

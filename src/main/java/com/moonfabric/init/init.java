@@ -2,31 +2,27 @@ package com.moonfabric.init;
 
 import com.moonfabric.ABook;
 import com.moonfabric.MoonFabricMod;
-
+import com.moonfabric.item.Ms.CottonCandy.*;
 import com.moonfabric.item.Ms.origincube;
-import com.moonfabric.item.common.*;
-import com.moonfabric.item.common.Mise.firehead;
-import com.moonfabric.item.common.Mise.goldheart;
-import com.moonfabric.item.common.Mise.*;
-import com.moonfabric.item.common.pain.*;
-import com.moonfabric.item.nightmare.*;
-import com.moonfabric.item.ectoplasm.*;
 import com.moonfabric.item.TheNecora.*;
 import com.moonfabric.item.common.Blood.*;
-import com.moonfabric.item.common.max.*;
+import com.moonfabric.item.common.CurseOrDoom.*;
+import com.moonfabric.item.common.Mise.*;
 import com.moonfabric.item.common.NaNo.*;
-import com.moonfabric.item.common.Blood.*;
-import com.moonfabric.item.common.Blood.*;
-import com.moonfabric.item.dna.*;
-import com.moonfabric.item.Ms.CottonCandy.*;
-import com.moonfabric.item.*;
-import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
+import com.moonfabric.item.common.*;
+import com.moonfabric.item.common.max.glodstone;
+import com.moonfabric.item.common.pain.*;
+import com.moonfabric.item.dna.dna;
+import com.moonfabric.item.ectoplasm.*;
+import com.moonfabric.item.nightmare.super_nightmare.*;
+import com.moonfabric.item.necora;
+import com.moonfabric.item.nightmare.*;
+import com.moonfabric.item.sevensword;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
-import com.moonfabric.item.common.CurseOrDoom.*;
 
 import java.util.function.Function;
 
@@ -144,6 +140,43 @@ public class init  {
     public static final Item owner_blood_vex =  register( "owner_blood_vex",Item::new);
     public static final Item owner_blood_earth = register( "owner_blood_earth",Item::new);
 
+    public static final Item nightmare_base_black_eye =register("nightmare_base_black_eye", nightmare_base_black_eye::new);
+    public static final Item nightmare_base =register("nightmare_base", nightmare_base::new);
+
+    public static final Item nightmare_base_black_eye_eye =register("nightmare_base_black_eye_eye", nightmare_base_black_eye_eye::new);
+    public static final Item nightmare_base_black_eye_heart =register("nightmare_base_black_eye_heart", nightmare_base_black_eye_heart::new);
+
+    public static final Item nightmare_base_black_eye_red =register("nightmare_base_black_eye_red", nightmare_base_black_eye_red::new);
+    public static final Item nightmare_base_stone =register("nightmare_base_stone", nightmare_base_stone::new);
+    public static final Item nightmare_base_stone_meet =register("nightmare_base_stone_meet", nightmare_base_stone_meet::new);
+
+    public static final Item nightmare_base_stone_virus =register("nightmare_base_stone_virus", nightmare_base_stone_virus::new);
+    public static final Item nightmare_base_stone_brain =register("nightmare_base_stone_brain", nightmare_base_stone_brain::new);
+
+    public static final Item nightmare_virus =register("nightmare_virus", nightmare_virus::new);
+    public static final Item nightmare_base_reversal =register("nightmare_base_reversal", nightmare_base_reversal::new);
+
+    public static final Item nightmare_base_reversal_orb =register("nightmare_base_reversal_orb", nightmare_base_reversal_orb::new);
+    public static final Item nightmare_base_reversal_card =register("nightmare_base_reversal_card", nightmare_base_reversal_card::new);
+    public static final Item nightmare_base_reversal_mysterious =register("nightmare_base_reversal_mysterious", nightmare_base_reversal_mysterious::new);
+
+    public static final Item nightmare_base_redemption =register("nightmare_base_redemption", nightmare_base_redemption::new);
+    public static final Item nightmare_base_redemption_deception =register("nightmare_base_redemption_deception", nightmare_base_redemption_deception::new);
+    public static final Item nightmare_base_redemption_degenerate =register("nightmare_base_redemption_degenerate", nightmare_base_redemption_degenerate::new);
+    public static final Item nightmare_base_redemption_down_and_out =register("nightmare_base_redemption_down_and_out", nightmare_base_redemption_down_and_out::new);
+    public static final Item nightmare_base_fool =register("nightmare_base_fool", nightmare_base_fool::new);
+    public static final Item nightmare_base_fool_soul =register("nightmare_base_fool_soul", nightmare_base_fool_soul::new);
+    public static final Item nightmare_base_fool_bone =register("nightmare_base_fool_bone", nightmare_base_fool_bone::new);
+    public static final Item nightmare_base_fool_betray =register("nightmare_base_fool_betray", nightmare_base_fool_betray::new);
+    public static final Item nightmare_base_insight =register("nightmare_base_insight", nightmare_base_insight::new);
+    public static final Item nightmare_base_insight_drug =register("nightmare_base_insight_drug", nightmare_base_insight_drug::new);
+    public static final Item nightmare_base_insight_insane =register("nightmare_base_insight_insane", nightmare_base_insight_insane::new);
+    public static final Item nightmare_base_insight_collapse =register("nightmare_base_insight_collapse", nightmare_base_insight_collapse::new);
+    public static final Item nightmare_base_start =register("nightmare_base_start", nightmare_base_start::new);
+    public static final Item nightmare_base_start_pod =register("nightmare_base_start_pod", nightmare_base_start_pod::new);
+    public static final Item nightmare_base_start_egg =register("nightmare_base_start_egg", nightmare_base_start_egg::new);
+
+    public static final Item nightmare_base_start_power =register("nightmare_base_start_power", nightmare_base_start_power::new);
 
     public static Item register(String key, Function<Item.Settings, Item> factory) {
         final RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MoonFabricMod.MODID, key));

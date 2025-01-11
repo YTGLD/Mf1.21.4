@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/root",
+  "criteria": {
+    "greenstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:greenstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "I will never cease to live "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:greenstone"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "green stone"
+    }
+  },
+  "requirements": [
+    [
+      "greenstone"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

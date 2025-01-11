@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/cube",
+  "criteria": {
+    "firecottoncandy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:firecottoncandy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "I am greater than gold "
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:firecottoncandy"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "fire cotton candy"
+    }
+  },
+  "requirements": [
+    [
+      "firecottoncandy"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

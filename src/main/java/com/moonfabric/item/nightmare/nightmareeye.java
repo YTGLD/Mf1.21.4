@@ -41,6 +41,7 @@ public class nightmareeye extends nightmare {
 
     @Override
     public void onUnequip(ItemStack stack, SlotReference reference) {
+        super.onUnequip(stack,reference);
         reference.entity().getAttributes().removeModifiers(un_un_pla( reference.entity(),stack));
     }
 

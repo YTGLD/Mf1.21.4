@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/root",
+  "criteria": {
+    "rageorb": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:rageorb"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "I am very angry "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:rageorb"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "rage orb"
+    }
+  },
+  "requirements": [
+    [
+      "rageorb"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -10,16 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Rarity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemTir extends AccessoryItem {
     public ItemTir(Settings settings) {
         super(settings.maxCount(1));
-    }
-    @Override
-    public boolean canEquip(ItemStack stack, SlotReference reference) {
-        if (reference.entity() instanceof PlayerEntity player){
-            return !HasCurio.has(this, player);
-        }
-        return true;
     }
 
 

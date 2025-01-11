@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/root",
+  "criteria": {
+    "bluestone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:bluestone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "I will watch it forever "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:bluestone"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "blue stone"
+    }
+  },
+  "requirements": [
+    [
+      "bluestone"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

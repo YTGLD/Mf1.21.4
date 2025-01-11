@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/rageorb",
+  "criteria": {
+    "doomsoul": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:doomsoul"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "The soul of the apocalypse, it never stops "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:doomsoul"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "doom soul"
+    }
+  },
+  "requirements": [
+    [
+      "doomsoul"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

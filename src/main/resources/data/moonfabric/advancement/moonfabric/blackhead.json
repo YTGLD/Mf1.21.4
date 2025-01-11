@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/blackorb",
+  "criteria": {
+    "blackhead": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:blackhead"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Pure dark magic, but... What is the cost..."
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:blackhead"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "black head"
+    }
+  },
+  "requirements": [
+    [
+      "blackhead"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

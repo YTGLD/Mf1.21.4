@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/root",
+  "criteria": {
+    "goldbox": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:goldbox"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Open! "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:goldbox"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "gold box"
+    }
+  },
+  "requirements": [
+    [
+      "goldbox"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

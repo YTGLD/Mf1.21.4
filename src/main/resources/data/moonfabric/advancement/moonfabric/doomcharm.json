@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/rageorb",
+  "criteria": {
+    "doomcharm": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:doomcharm"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "The Apocalyptic obelisk "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:doomcharm"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "doom charm"
+    }
+  },
+  "requirements": [
+    [
+      "doomcharm"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

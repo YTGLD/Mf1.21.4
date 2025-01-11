@@ -54,7 +54,7 @@ public class InItEntity {
 
     public static final EntityType<nightmare_giant> nightmare_giant =
             FabricEntityTypeBuilder.createLiving()
-                    .dimensions(EntityDimensions.changing(1.4F,2))
+                    .dimensions(EntityDimensions.changing(2,3))
                     .trackRangeBlocks(50)
                     .defaultAttributes(com.moonfabric.Entity.nightmare_giant::addAttributes)
                     .entityFactory(nightmare_giant::new)

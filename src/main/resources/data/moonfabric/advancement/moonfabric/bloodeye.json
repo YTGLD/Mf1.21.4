@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/bloodorb",
+  "criteria": {
+    "bloodeye": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:bloodeye"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "luck age"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:bloodeye"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "The orb ring?"
+    }
+  },
+  "requirements": [
+    [
+      "bloodeye"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

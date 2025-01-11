@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/grail",
+  "criteria": {
+    "twistedsoul": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:twistedsoul"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Don't touch me! "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:twistedsoul"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "twisted soul"
+    }
+  },
+  "requirements": [
+    [
+      "twistedsoul"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

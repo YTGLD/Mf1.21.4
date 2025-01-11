@@ -1,0 +1,38 @@
+{
+  "criteria": {
+    "root": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:dirt"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "background": "minecraft:textures/block/cracked_deepslate_tiles.png",
+    "description": {
+      "text": "Start your journey"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:goldbox"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "Moonfabric!"
+    }
+  },
+  "requirements": [
+    [
+      "root"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

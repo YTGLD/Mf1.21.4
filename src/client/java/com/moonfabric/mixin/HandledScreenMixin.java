@@ -2,6 +2,7 @@ package com.moonfabric.mixin;
 
 import com.moonfabric.IDrawContext;
 import com.moonfabric.MRender;
+import com.moonfabric.item.Ms.SNightmare;
 import com.moonfabric.item.Ms.TheNecoraIC;
 import com.moonfabric.item.Ms.nightmare;
 import net.minecraft.client.gui.DrawContext;
@@ -78,7 +79,7 @@ public abstract class HandledScreenMixin <T extends ScreenHandler> extends Scree
 
                             context.getMatrices().pop();
                         }
-                        if (itemStack.getItem() instanceof nightmare) {
+                        if (itemStack.getItem() instanceof nightmare||itemStack.getItem() instanceof SNightmare) {
                             context.getMatrices().push();
 
                             render(MRender.getBloodNIG(), context, n, o, i, j, 400);

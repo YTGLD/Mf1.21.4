@@ -3,6 +3,10 @@ package com.moonfabric;
 import com.moonfabric.init.Data;
 import com.moonfabric.init.init;
 import com.moonfabric.item.common.Blood.blood_stones;
+import com.moonfabric.item.common.pain.pain_carrot;
+import io.wispforest.accessories.api.AccessoriesCapability;
+import io.wispforest.accessories.api.AccessoriesContainer;
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import net.minecraft.client.render.OverlayTexture;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -13,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.RotationAxis;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Map;
+
 public class Sword {
     public Sword(@NotNull MatrixStack matrices,
                  @NotNull VertexConsumerProvider vertexConsumers,
@@ -21,67 +27,84 @@ public class Sword {
         if (entity instanceof LivingEntity living) {
             float s = 1;
             if (HasCurio.has(init.blood_stones, living)) {
-                ItemStack stack = HasCurio.getItemStack(living);
-                if (stack.get(Data.CUSTOM_DATA) != null) {
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 0) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 20));
-                        matrices.translate(0, 0.07+s, 0.7 * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.17f);
-                        matrices.pop();
-                    }
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 1) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 22));
-                        matrices.translate(0, 0+s, 0.5f * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.14f);
-                        matrices.pop();
-                    }
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 2) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 10));
-                        matrices.translate(0, 0.2+s, 0.45 * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.1f);
-                        matrices.pop();
-                    }
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 3) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 21));
-                        matrices.translate(0, 0.22+s, 0.23 * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.075f);
-                        matrices.pop();
-                    }
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 4) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 8));
-                        matrices.translate(0, 0.25+s, 0.55 * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.12f);
-                        matrices.pop();
+
+                AccessoriesCapability capability = AccessoriesCapability.get(living);
+                if (capability == null) {
+
+                    for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                        AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                        ExpandedSimpleContainer accessories = container.getAccessories();
+                        for (int i = 0; i < accessories.size(); ++i) {
+                            ItemStack stack = accessories.getStack(i);
+                            if (!stack.isEmpty()) {
+                                if (stack.get(Data.CUSTOM_DATA) != null) {
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 0) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 20));
+                                        matrices.translate(0, 0.07+s, 0.7 * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.17f);
+                                        matrices.pop();
+                                    }
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 1) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 22));
+                                        matrices.translate(0, 0+s, 0.5f * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.14f);
+                                        matrices.pop();
+                                    }
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 2) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 10));
+                                        matrices.translate(0, 0.2+s, 0.45 * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.1f);
+                                        matrices.pop();
+                                    }
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 3) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 21));
+                                        matrices.translate(0, 0.22+s, 0.23 * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.075f);
+                                        matrices.pop();
+                                    }
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 4) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 8));
+                                        matrices.translate(0, 0.25+s, 0.55 * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.12f);
+                                        matrices.pop();
 
 
+                                    }
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 5) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 6));
+                                        matrices.translate(0, -0.05+s, 0.58 * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.1f);
+                                        matrices.pop();
+                                    }
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 6) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 15));
+                                        matrices.translate(0, 0.11+s, 0.6 * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.15f);
+                                        matrices.pop();
+                                    }
+                                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 7) {
+                                        matrices.push();
+                                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 20));
+                                        matrices.translate(0, 0.11+s, 0.4 * 1.5);
+                                        renderSphere1(matrices, vertexConsumers, light, 0.22f);
+                                        matrices.pop();
+                                    }
+                                }
+                            }
+                        }
                     }
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 5) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 6));
-                        matrices.translate(0, -0.05+s, 0.58 * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.1f);
-                        matrices.pop();
-                    }
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 6) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 15));
-                        matrices.translate(0, 0.11+s, 0.6 * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.15f);
-                        matrices.pop();
-                    }
-                    if (stack.get(Data.CUSTOM_DATA).getInt(blood_stones.MaxSword) > 7) {
-                        matrices.push();
-                        matrices.multiply(RotationAxis.NEGATIVE_Y.rotation((float) living.age / 20));
-                        matrices.translate(0, 0.11+s, 0.4 * 1.5);
-                        renderSphere1(matrices, vertexConsumers, light, 0.22f);
-                        matrices.pop();
-                    }
+
                 }
+
+
+
 
             }
         }
@@ -91,7 +114,7 @@ public class Sword {
             float radius = s; // 球体的半径
             int stacks = 20; // 垂直方向的分割数
             int slices = 20; // 水平方向的分割数
-            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.getBlood());
+            VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.BLOOD_OUTLINE);
             for (int i = 0; i < stacks; ++i) {
                 float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);
                 float phi1 = (float) Math.PI * ((i + 1) / (float) stacks);

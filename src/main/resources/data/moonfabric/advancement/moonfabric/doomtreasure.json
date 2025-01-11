@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/rageorb",
+  "criteria": {
+    "doomtreasure": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:doomtreasure"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "The Greedy Man of the Apocalypse "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:doomtreasure"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "doom treasure"
+    }
+  },
+  "requirements": [
+    [
+      "doomtreasure"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

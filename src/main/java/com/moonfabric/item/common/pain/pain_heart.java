@@ -39,8 +39,8 @@ public class pain_heart extends ItemTir {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(EntityAttributes.MAX_HEALTH,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),10, EntityAttributeModifier.Operation.ADD_VALUE));
-        builder.addExclusive(AttReg.heal,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.33, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.MAX_HEALTH,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),10, EntityAttributeModifier.Operation.ADD_VALUE));
+        builder.addStackable(AttReg.heal,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.33, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 
     @Override

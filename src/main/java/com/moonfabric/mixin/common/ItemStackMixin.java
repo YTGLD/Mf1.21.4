@@ -5,6 +5,9 @@ import com.moonfabric.Ievent.old.IFood;
 import com.moonfabric.init.Data;
 import com.moonfabric.init.init;
 import com.moonfabric.item.common.pain.pain_carrot;
+import io.wispforest.accessories.api.AccessoriesCapability;
+import io.wispforest.accessories.api.AccessoriesContainer;
+import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -23,6 +26,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+import java.util.Map;
 
 @Mixin(ItemStack.class)
 public abstract class ItemStackMixin {
@@ -51,13 +56,29 @@ public abstract class ItemStackMixin {
     @Inject(method = "finishUsing", at = @At(value = "RETURN"))
     private void moon$finishUsing(World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir){
         IFood.Break.invoker().Food((ItemStack)(Object)this,world,user);
-        ItemStack itemStack = HasCurio.getItemStack(user);
         if (user instanceof PlayerEntity player){
-            if (HasCurio.has(init.pain_carrot, player)){
-                if (itemStack.get(Data.CUSTOM_DATA)!=null) {
-                    itemStack.get(Data.CUSTOM_DATA).putFloat(pain_carrot.eat, itemStack.get(Data.CUSTOM_DATA).getFloat(pain_carrot.eat) + 0.1f);
+
+            AccessoriesCapability capability = AccessoriesCapability.get(player);
+            if (capability != null) {
+
+                for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
+                    AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
+                    ExpandedSimpleContainer accessories = container.getAccessories();
+                    for (int i = 0; i < accessories.size(); ++i) {
+                        ItemStack stack = accessories.getStack(i);
+                        if (!stack.isEmpty()) {
+                            if (HasCurio.has(init.pain_carrot, player)){
+                                if (stack.get(Data.CUSTOM_DATA)!=null) {
+                                    stack.get(Data.CUSTOM_DATA).putFloat(pain_carrot.eat, stack.get(Data.CUSTOM_DATA).getFloat(pain_carrot.eat) + 0.1f);
+                                }
+                            }
+                        }
+                    }
                 }
+
             }
+
+
             if (HasCurio.has(init.pain_book, player)){
                 player.addStatusEffect(new StatusEffectInstance(StatusEffects.HUNGER, 200, 2));
                 ItemStack stack =(ItemStack) (Object) this;

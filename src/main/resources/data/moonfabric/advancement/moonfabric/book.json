@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/goldbox",
+  "criteria": {
+    "book": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:book"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "The sea of knowledge "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:book"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "book"
+    }
+  },
+  "requirements": [
+    [
+      "book"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

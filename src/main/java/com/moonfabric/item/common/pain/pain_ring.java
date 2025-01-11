@@ -34,7 +34,7 @@ public class pain_ring extends ItemTir {
     }
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(EntityAttributes.ARMOR,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),-10, EntityAttributeModifier.Operation.ADD_VALUE));
+        builder.addStackable(EntityAttributes.ARMOR,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),-10, EntityAttributeModifier.Operation.ADD_VALUE));
     }
 
     @Override

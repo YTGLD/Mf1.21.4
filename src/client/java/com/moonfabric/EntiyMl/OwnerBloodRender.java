@@ -36,7 +36,7 @@ public class OwnerBloodRender <T extends owner_blood> extends EntityRenderer<T, 
             }
         }
 
-        getBloodOutLine(matrixStack,vertexConsumers,240,1f);
+        getBloodOutLine(matrixStack,vertexConsumers,240,0.75f);
     }
     private void setT(MatrixStack matrices,
                       owner_blood entity,
@@ -54,7 +54,7 @@ public class OwnerBloodRender <T extends owner_blood> extends EntityRenderer<T, 
 
             float alpha = (float)(i) / (float)(entity.getTrailPositions().size());
 
-            Handler.renderLine(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, RenderLayer.getLightning(),0.8f);
+            Handler.renderLine(matrices, vertexConsumers, adjustedPrevPos, adjustedCurrPos, alpha, RenderLayer.getLightning(),0.5f);
 
         }
         matrices.pop();

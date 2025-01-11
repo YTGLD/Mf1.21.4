@@ -16,6 +16,6 @@ public class bloodeye extends TheNecoraIC {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(EntityAttributes.MAX_HEALTH,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.15, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.MAX_HEALTH,new EntityAttributeModifier(Identifier.of("moonfabric"+this.getTranslationKey()),0.15, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 }

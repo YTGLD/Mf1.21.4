@@ -38,7 +38,7 @@ public class whiteorb extends ItemTir {
         }
 
 
-        builder.addExclusive(EntityAttributes.ATTACK_SPEED,new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),a, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.ATTACK_SPEED,new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),a, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 
 

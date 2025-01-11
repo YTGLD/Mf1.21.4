@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/rageorb",
+  "criteria": {
+    "doomstone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:doomstone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "Doomsday Gambling "
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:doomstone"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "doom stone"
+    }
+  },
+  "requirements": [
+    [
+      "doomstone"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -334,10 +334,8 @@ public class moonfabricLoot {
                     .bonusRolls(ConstantLootNumberProvider.create(1.0f))
                     .with(ItemEntry.builder(init.twistedstone)
                             .apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.03f)))));
-            supplier.pool(LootPool.builder()
-                    .bonusRolls(ConstantLootNumberProvider.create(1.0f))
-                    .with(ItemEntry.builder(init.cube)
-                            .apply(SetCountLootFunction.builder(BinomialLootNumberProvider.create(1, 0.03f)))));
+
+
             supplier.pool(LootPool.builder()
                     .bonusRolls(ConstantLootNumberProvider.create(1.0f))
                     .with(ItemEntry.builder(init.fallstone)

@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/nanoheart",
+  "criteria": {
+    "nanofruit": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:nanofruit"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "nano fruit"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:nanofruit"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "the fruit"
+    }
+  },
+  "requirements": [
+    [
+      "nanofruit"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

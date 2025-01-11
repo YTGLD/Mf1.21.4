@@ -2,6 +2,7 @@ package com.moonfabric.Entity;
 
 import com.mojang.logging.LogUtils;
 import com.moonfabric.HasCurio;
+import com.moonfabric.Ievent.AllEvent;
 import com.moonfabric.init.InItEntity;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -24,6 +25,7 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.server.network.DebugInfoSender;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Unit;
@@ -114,11 +116,14 @@ public class nightmare_giant extends TameableZombie {
             this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 12.5f, true, World.ExplosionSourceType.NONE);
         }
     }
+    int sZombieTime = 0;
 
 
     public void tick() {
         time++;
-
+        if (sZombieTime>0){
+            sZombieTime--;
+        }
         if (!this.getCommandTags().contains(HasCurio.Giant_Time)) {
             time += 3;
         }else {
@@ -127,7 +132,24 @@ public class nightmare_giant extends TameableZombie {
         if (this.time > 3600){
             this.discard();
         }
+        {
+            Vec3d playerPos = this.getPos();
+            float range = 16;
+            List<cell_zombie> entities =
+                    this.getWorld().getEntitiesByClass(cell_zombie.class,
+                            new Box(playerPos.x - range,
+                                    playerPos.y - range,
+                                    playerPos.z - range,
+                                    playerPos.x + range,
+                                    playerPos.y + range,
+                                    playerPos.z + range), EntityPredicates.EXCEPT_SPECTATOR);
 
+            for (cell_zombie cellZombie : entities) {
+                if (this.age % 20 == 1) {
+                    this.heal(entities.size());
+                }
+            }
+        }
         if (this.getOwner()!= null) {
             if (this.getOwner().getLastAttacker()!= null) {
                 if (!(this.getOwner().getLastAttacker() ==(this))) {
@@ -165,6 +187,20 @@ public class nightmare_giant extends TameableZombie {
             if (this.getTarget() == null) {
                 if (!(mob instanceof TameableZombie)) {
                     this.setTarget(mob);
+                    if (sZombieTime<=0){
+                        if (this.getOwner()!=null) {
+                            for (int i = 0; i < 2; i++) {
+                                cell_zombie cellZombie = new cell_zombie(InItEntity.cell_zombie, this.getEntityWorld());
+                                cellZombie.setPos(this.getX(), this.getY(), this.getZ());
+                                cellZombie.setOwnerUuid(this.getOwnerUuid());
+                                cellZombie.addCommandTag(AllEvent.DamageCell);
+                                cellZombie.addCommandTag("hasNig");
+                                this.getWorld().playSound(null,this.getBlockPos(),SoundEvents.BLOCK_TRIAL_SPAWNER_AMBIENT_OMINOUS, SoundCategory.AMBIENT,10,10);
+                                this.getWorld().spawnEntity(cellZombie);
+                                sZombieTime = 300;
+                            }
+                        }
+                    }
                 }
             }
         }

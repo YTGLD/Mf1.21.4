@@ -20,7 +20,7 @@ public class fallstone extends ItemTir {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.addExclusive(EntityAttributes.MOVEMENT_SPEED, new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),0.3, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+        builder.addStackable(EntityAttributes.MOVEMENT_SPEED, new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),0.3, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
     }
 
 

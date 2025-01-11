@@ -17,13 +17,7 @@ public class ectoplasm extends AccessoryItem {
                 .food(new FoodComponent.Builder().nutrition(4).alwaysEdible().saturationModifier(0.2f).build()));
     }
 
-    @Override
-    public boolean canEquip(ItemStack stack, SlotReference reference) {
-        if (reference.entity() instanceof PlayerEntity player){
-            return !HasCurio.has(this, player);
-        }
-        return true;
-    }
+
 
 
     @Override

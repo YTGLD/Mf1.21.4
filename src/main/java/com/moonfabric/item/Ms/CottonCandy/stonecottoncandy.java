@@ -29,14 +29,17 @@ public class stonecottoncandy extends CottonCandy{
 
     @Override
     public void onEquip(ItemStack stack, SlotReference reference) {
+        super.onEquip(stack,reference);
         reference.entity().getAttributes().addTemporaryModifiers(this.getModifiers(reference.entity()));
 
         if (stack.get(Data.CUSTOM_DATA) == null) {
             stack.set(Data.CUSTOM_DATA,new NbtCompound());
-        }    }
+        }
+    }
 
     @Override
     public void onUnequip(ItemStack stack, SlotReference reference) {
+        super.onUnequip(stack,reference);
         reference.entity().getAttributes().removeModifiers(this.getModifiers(reference.entity()));
     }
 

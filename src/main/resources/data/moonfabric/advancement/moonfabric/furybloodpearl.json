@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/bloodcharm",
+  "criteria": {
+    "furybloodpearl": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:furybloodpearl"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "The Rage Pearl"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:furybloodpearl"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "furybloodpearl"
+    }
+  },
+  "requirements": [
+    [
+      "furybloodpearl"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}

@@ -44,7 +44,7 @@ public class watercottoncandy extends CottonCandy{
     public void tick(ItemStack stack, SlotReference reference) {
         if (reference.entity().isTouchingWaterOrRain()){
             if (reference.entity() instanceof PlayerEntity player) {
-                if (!player.getItemCooldownManager().isCoolingDown(this.getDefaultStack())) {
+                if (!player.getItemCooldownManager().isCoolingDown(stack)) {
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.CONDUIT_POWER, 400, 2));
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 400, 2));
                     player.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, 400, 0));

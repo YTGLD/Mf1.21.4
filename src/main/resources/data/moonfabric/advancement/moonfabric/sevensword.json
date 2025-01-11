@@ -1,0 +1,41 @@
+{
+  "parent": "moonfabric:moonfabric/nanoheart",
+  "criteria": {
+    "sevensword": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "moonfabric:sevensword"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "text": "seven sword"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "id": "moonfabric:sevensword"
+    },
+    "show_toast": true,
+    "title": {
+      "text": "We! Nanos!"
+    }
+  },
+  "requirements": [
+    [
+      "sevensword"
+    ]
+  ],
+  "rewards": {
+    "experience": 100
+  },
+  "sends_telemetry_event": true
+}
