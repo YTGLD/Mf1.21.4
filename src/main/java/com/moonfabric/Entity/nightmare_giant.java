@@ -1,6 +1,7 @@
 package com.moonfabric.Entity;
 
 import com.mojang.logging.LogUtils;
+import com.moonfabric.HandlerMain;
 import com.moonfabric.HasCurio;
 import com.moonfabric.Ievent.AllEvent;
 import com.moonfabric.init.InItEntity;
@@ -100,14 +101,6 @@ public class nightmare_giant extends TameableZombie {
         return super.tryAttack(world,target);
     }
 
-    @Contract("null->false")
-    public boolean isValidTarget(@Nullable Entity entity) {
-        if (entity instanceof LivingEntity livingEntity) {
-            return this.getWorld() == entity.getWorld() && EntityPredicates.EXCEPT_CREATIVE_OR_SPECTATOR.test(entity) && !this.isTeammate(entity) && livingEntity.getType() != EntityType.ARMOR_STAND && livingEntity.getType() != EntityType.WARDEN && !livingEntity.isInvulnerable() && !livingEntity.isDead() && this.getWorld().getWorldBorder().contains(livingEntity.getBoundingBox());
-        }
-        return false;
-    }
-
     public  int time ;
 
     @Override
@@ -144,29 +137,28 @@ public class nightmare_giant extends TameableZombie {
                                     playerPos.y + range,
                                     playerPos.z + range), EntityPredicates.EXCEPT_SPECTATOR);
 
-            for (cell_zombie cellZombie : entities) {
+            for (cell_zombie ignored : entities) {
                 if (this.age % 20 == 1) {
                     this.heal(entities.size());
                 }
             }
         }
         if (this.getOwner()!= null) {
-            if (this.getOwner().getLastAttacker()!= null) {
-                if (!(this.getOwner().getLastAttacker() ==(this))) {
+            if (this.getOwner().getLastAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getLastAttacker())) {
+                if (!(this.getOwner().getLastAttacker() == (this))) {
                     this.setTarget(this.getOwner().getLastAttacker());
                 }
             }
-            if (this.getOwner().getAttacker()!= null) {
-                if (!(this.getOwner().getAttacker() ==(this))) {
-                    this.setTarget(this.getOwner().getAttacker());
-                }
-
-            }
-            if (this.getOwner().getAttacking()!= null) {
-                if (!(this.getOwner().getAttacking() ==(this))) {
+            if (this.getOwner().getAttacking()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacking())) {
+                if (!(this.getOwner().getAttacking() == (this))) {
                     this.setTarget(this.getOwner().getAttacking());
                 }
 
+            }
+            if (this.getOwner().getAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacker())) {
+                if (!(this.getOwner().getAttacker() == (this))) {
+                    this.setTarget(this.getOwner().getAttacker());
+                }
             }
         }
 
@@ -253,9 +245,6 @@ public class nightmare_giant extends TameableZombie {
         this.targetSelector.add(2, new AttackWithOwnerGoal(this));
         this.targetSelector.add(3, (new RevengeGoal(this)).setGroupRevenge());
 
-    }
-    public float getTendrilPitch(float tickDelta) {
-        return MathHelper.lerp(tickDelta, (float)this.lastTendrilPitch, (float)this.tendrilPitch) / 10.0F;
     }
 
     private void addDigParticles(AnimationState animationState) {

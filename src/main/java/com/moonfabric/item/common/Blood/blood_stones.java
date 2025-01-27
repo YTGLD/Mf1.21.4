@@ -125,6 +125,7 @@ public class blood_stones extends TheNecoraIC {
 
                         for (LivingEntity living : entities){
                             if (!(living ==(entity))){
+
                             }
                         }
                     }

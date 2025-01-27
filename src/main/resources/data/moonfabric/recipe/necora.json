@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "moonfabric:calcification",
+    "moonfabric:masticatory",
+    "moonfabric:polyphagia",
+    "moonfabric:quadriceps",
+    "moonfabric:reanimation",
+    "moonfabric:ectoplasmcube"
+  ],
+  "result": {
+    "id": "moonfabric:necora",
+    "count": 1
+  }
+}

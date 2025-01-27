@@ -75,7 +75,7 @@ public class AllZombie {
             if (HasCurio.has(init.giant, player)){
                 if (!HasCurio.has(init.giant_nightmare, player)) {
                     if (player.getWorld() instanceof ServerWorld p_222881_) {
-                        if (MathHelper.nextInt(Random.create(), 1, 10) == 1) {
+                        if (MathHelper.nextInt(Random.create(), 1, 8) == 1) {
                             {
                                 cell_giant cell_giant = new cell_giant(InItEntity.cell_giant, player.getWorld());
                                 addTag(cell_giant, player);
@@ -108,7 +108,7 @@ public class AllZombie {
                     }
                 } else {
                     if (player.getWorld() instanceof ServerWorld p_222881_) {
-                        if (MathHelper.nextInt(Random.create(), 1, 10) == 1) {
+                        if (MathHelper.nextInt(Random.create(), 1, 8) == 1) {
                             nightmare_giant cell_giant = new nightmare_giant(InItEntity.nightmare_giant, player.getWorld());
                             addTag(cell_giant, player);
                             cell_giant.setPos(player.getX(), player.getY(), player.getZ());

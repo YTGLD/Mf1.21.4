@@ -73,7 +73,7 @@ public class nightmareeye extends nightmare {
         if (HasCurio.has(init.nightmarerotten, player)){
             float a = Registries.ATTRIBUTE.size();
             a /= 100;
-            a *= 1.1F;
+            a *= 0.2f;
             s += a;
         }
 

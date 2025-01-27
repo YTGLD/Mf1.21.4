@@ -1,10 +1,14 @@
 package com.moonfabric.item.nightmare.super_nightmare;
 
+import com.moonfabric.Ievent.AdvancementEvt;
+import com.moonfabric.init.Data;
+import com.moonfabric.init.init;
 import com.moonfabric.item.Ms.nightmare;
 import io.wispforest.accessories.api.slot.SlotReference;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -23,6 +27,21 @@ public class nightmare_base_redemption extends com.moonfabric.item.Ms.SNightmare
             }
         }
         return false;
+    }
+
+    @Override
+    public void tick(ItemStack stack, SlotReference reference) {
+        super.tick(stack, reference);
+        if (reference.entity() instanceof PlayerEntity player){
+            if (player.getWorld() instanceof ServerWorld serverLevel){
+                if (serverLevel.getRaidAt(player.getBlockPos())!=null && serverLevel.getRaidAt(player.getBlockPos()).hasLost()){
+                    if (stack.get(Data.CUSTOM_DATA)!=null&&!stack.get(Data.CUSTOM_DATA).getBoolean(AdvancementEvt.nightmare_base_redemption_down_and_out)){
+                        player.giveItemStack(new ItemStack(init.nightmare_base_redemption_down_and_out));
+                        stack.get(Data.CUSTOM_DATA).putBoolean(AdvancementEvt.nightmare_base_redemption_down_and_out,true);
+                    }
+                }
+            }
+        }
     }
 
     @Override

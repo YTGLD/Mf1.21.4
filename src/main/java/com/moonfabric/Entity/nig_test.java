@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.UUID;
 
-public class nig_test extends TameableEntity {
+public class nig_test extends TameableZombie {
 
     public nig_test(EntityType<? extends nig_test> entityType, World world) {
         super(entityType, world);

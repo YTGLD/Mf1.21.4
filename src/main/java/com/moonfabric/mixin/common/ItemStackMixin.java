@@ -5,6 +5,8 @@ import com.moonfabric.Ievent.old.IFood;
 import com.moonfabric.init.Data;
 import com.moonfabric.init.init;
 import com.moonfabric.item.common.pain.pain_carrot;
+import com.moonfabric.item.dna.med.polyphagia;
+import com.moonfabric.item.dna.medicinebox;
 import io.wispforest.accessories.api.AccessoriesCapability;
 import io.wispforest.accessories.api.AccessoriesContainer;
 import io.wispforest.accessories.impl.ExpandedSimpleContainer;
@@ -56,8 +58,10 @@ public abstract class ItemStackMixin {
     @Inject(method = "finishUsing", at = @At(value = "RETURN"))
     private void moon$finishUsing(World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir){
         IFood.Break.invoker().Food((ItemStack)(Object)this,world,user);
+        polyphagia.necora(user,cir,(ItemStack) (Object) this);
         if (user instanceof PlayerEntity player){
-
+            medicinebox.apple(player,cir);
+            medicinebox.enchant(player,cir);
             AccessoriesCapability capability = AccessoriesCapability.get(player);
             if (capability != null) {
 

@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class penalty  extends TameableEntity {
+public class penalty  extends TameableZombie {
 
 
     private final List<Vec3d> trailPositions = new ArrayList<>();

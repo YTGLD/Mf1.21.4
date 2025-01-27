@@ -1,9 +1,14 @@
 package com.moonfabric;
 
+import com.moonfabric.mixin.common.LivingEntityMixin;
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.registry.Registries;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 
 public class Handler {
@@ -100,4 +105,13 @@ public class Handler {
         }
     }
 
+    public static boolean IsNoon(MobEntity me , LivingEntity target){
+        if (me.getTarget()!=null){
+            Identifier entityTypeId = Registries.ENTITY_TYPE.getId(target.getType());
+            if (entityTypeId.getNamespace().equals(MoonFabricMod.MODID)){
+                return false;
+            }
+        }
+        return true;
+    }
 }

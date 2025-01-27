@@ -1,5 +1,6 @@
 package com.moonfabric.Entity;
 
+import com.moonfabric.HandlerMain;
 import com.moonfabric.HasCurio;
 import com.moonfabric.MoonFabricMod;
 import com.moonfabric.init.InItEntity;
@@ -92,6 +93,9 @@ public class owner_blood extends TameableEntity {
                 if (!HasCurio.has(init.blood_candle, player)){
                     this.discard();
                 }
+                if (player.getItemCooldownManager().isCoolingDown(init.blood_candle.getDefaultStack())){
+                    this.discard();
+                }
             }
         }
         trailPositions.add(new Vec3d(this.getX(), this.getY(), this.getZ()));
@@ -106,18 +110,18 @@ public class owner_blood extends TameableEntity {
             }
         }
         if (this.getOwner()!= null) {
-            if (this.getOwner().getLastAttacker()!= null) {
+            if (this.getOwner().getLastAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getLastAttacker())) {
                 if (!(this.getOwner().getLastAttacker() == (this))) {
                     this.setTarget(this.getOwner().getLastAttacker());
                 }
             }
-            if (this.getOwner().getAttacking()!= null) {
+            if (this.getOwner().getAttacking()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacking())) {
                 if (!(this.getOwner().getAttacking() == (this))) {
                     this.setTarget(this.getOwner().getAttacking());
                 }
 
             }
-            if (this.getOwner().getAttacker()!= null) {
+            if (this.getOwner().getAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacker())) {
                 if (!(this.getOwner().getAttacker() == (this))) {
                     this.setTarget(this.getOwner().getAttacker());
                 }
@@ -192,7 +196,7 @@ public class owner_blood extends TameableEntity {
                     attack_blood attackBlood = new attack_blood(InItEntity.attack_blood, this.getEntityWorld());
                     if (HasCurio.has(init.owner_blood_speed_eye, player)) {
                         attackBlood.setCannotFollow(false);
-                        attackBlood.setSpeed(attackBlood.getSpeeds() * 10);
+                        attackBlood.setSpeed(attackBlood.getSpeeds() * 4);
                     }
                     if (HasCurio.has(init.owner_blood_attack_eye, player)) {
                         attackBlood.setDamage(attackBlood.getDamages() * 1.2f);

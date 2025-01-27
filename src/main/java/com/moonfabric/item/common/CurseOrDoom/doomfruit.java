@@ -31,7 +31,9 @@ public class doomfruit extends Item {
 
         if (AccessoriesCapability.get(user)!=null) {
             Multimap<String, EntityAttributeModifier> modifierMultimap = AccessoriesCapability.get(user).getSlotModifiers();
-            modifierMultimap.put("hand/ring", new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())), 1.0, EntityAttributeModifier.Operation.ADD_VALUE));
+
+            modifierMultimap.put("ring", new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())), 1, EntityAttributeModifier.Operation.ADD_VALUE));
+
             AccessoriesCapability.get(user).addPersistentSlotModifiers(modifierMultimap);
         }
         return ItemStack.EMPTY;

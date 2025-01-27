@@ -29,7 +29,7 @@ public class Sword {
             if (HasCurio.has(init.blood_stones, living)) {
 
                 AccessoriesCapability capability = AccessoriesCapability.get(living);
-                if (capability == null) {
+                if (capability != null) {
 
                     for (Map.Entry<String, AccessoriesContainer> stringAccessoriesContainerEntry : capability.getContainers().entrySet()) {
                         AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
@@ -112,8 +112,8 @@ public class Sword {
     public void renderSphere1(@NotNull MatrixStack matrices, @NotNull VertexConsumerProvider vertexConsumers, int light, float s) {
         {
             float radius = s; // 球体的半径
-            int stacks = 20; // 垂直方向的分割数
-            int slices = 20; // 水平方向的分割数
+            int stacks = 12; // 垂直方向的分割数
+            int slices = 12; // 水平方向的分割数
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.BLOOD_OUTLINE);
             for (int i = 0; i < stacks; ++i) {
                 float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);
@@ -148,8 +148,8 @@ public class Sword {
         }
         {
             float radius = s*1.25f; // 球体的半径
-            int stacks = 20; // 垂直方向的分割数
-            int slices = 20; // 水平方向的分割数
+            int stacks = 12; // 垂直方向的分割数
+            int slices = 12; // 水平方向的分割数
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.getBloodCommon());
             for (int i = 0; i < stacks; ++i) {
                 float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);

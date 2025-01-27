@@ -2,6 +2,7 @@ package com.moonfabric.item;
 
 import com.moonfabric.item.Ms.extend.ItemTir;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
+import io.wispforest.accessories.api.attributes.SlotAttribute;
 import io.wispforest.accessories.api.slot.SlotReference;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
@@ -24,7 +25,7 @@ public class necora extends ItemTir {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.getSlotModifiers().put("legs/belt",new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),1, EntityAttributeModifier.Operation.ADD_VALUE));
+        SlotAttribute.addSlotAttribute(builder,"belt", Identifier.of(String.valueOf(this.getTranslationKey())),2, EntityAttributeModifier.Operation.ADD_VALUE,true);
     }
 
 }

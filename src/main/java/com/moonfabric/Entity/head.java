@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class head extends TameableEntity {
+public class head extends TameableZombie {
 
 
     private final List<Vec3d> trailPositions = new ArrayList<>();

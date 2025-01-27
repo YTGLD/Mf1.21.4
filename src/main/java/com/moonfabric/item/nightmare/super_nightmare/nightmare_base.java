@@ -6,6 +6,8 @@ import com.moonfabric.HasCurio;
 import com.moonfabric.init.Data;
 import com.moonfabric.init.init;
 import com.moonfabric.item.Ms.nightmare;
+import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
+import io.wispforest.accessories.api.attributes.SlotAttribute;
 import io.wispforest.accessories.api.slot.SlotReference;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.attribute.EntityAttribute;
@@ -94,7 +96,10 @@ public class nightmare_base  extends com.moonfabric.item.Ms.SNightmare{
         return false;
     }
 
-
+    @Override
+    public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
+        SlotAttribute.addSlotAttribute(builder,"belt", Identifier.of(String.valueOf(this.getTranslationKey())),3, EntityAttributeModifier.Operation.ADD_VALUE,true);
+    }
     private void addLoot(Entity entity ,
                          Item itemList,
                          ItemStack stack){

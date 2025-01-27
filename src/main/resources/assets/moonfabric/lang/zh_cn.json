@@ -886,10 +886,12 @@
   "item.moonfabric.doomeye": "七剑修罗之心",
   "item.doomeye.tool.string": "受伤召唤7把飞剑攻击敌人",
   "item.doomeye.tool.string.1": "命中后使目标在5秒内受到的伤害+33%",
+
   "item.masticatory.tool.string.2": "吃8个金苹果",
   "item.calcification.tool.string.2": "受到350次伤害",
   "item.quadriceps.tool.string.3": "跳 500 次",
-  "item.reanimation.tool.string.4": "死掉",
+  "item.reanimation.tool.string.4": "杀死任意生物",
+  "item.polyphagia.tool.string": "吃一个附魔金苹果",
 
   "item.moonfabric.doomswoud": "骤雨",
   "item.doomswoud.tool.string": "击中生物造成2把飞剑",
@@ -977,7 +979,7 @@
 
 
   "advancements.tooltip.reanimation.hand": "细胞重生",
-  "advancements.tooltip.reanimation.text": "死掉",
+  "advancements.tooltip.reanimation.text": "杀死任意生物",
 
   "advancements.tooltip.necora.hand": "僵尸病毒",
   "advancements.tooltip.necora.text": "在佩戴此物品的情况下开取地牢箱子",
@@ -1029,7 +1031,6 @@
   "item.fortunecrystal.tool.string": "+3 时运",
   "item.moonfabric.fortunecrystal": "财富水晶",
   "item.moonfabric.mayhemcrystal": "混乱水晶",
-  "item.polyphagia.tool.string": "吃一个附魔金苹果",
 
 
   "item.moonfabric.cell_mummy": "木乃伊干尸化",
@@ -1584,7 +1585,7 @@
 
   "item.moonfabric.nightmare_base_reversal_orb": "§4反转球体",
   "item.nightmare_base_reversal_orb.tool.string": "治疗只会减少生命值",
-  "item.nightmare_base_reversal_orb.tool.string.2": "每隔10秒重置生命值至满血",
+  "item.nightmare_base_reversal_orb.tool.string.2": "每隔7秒重置生命值至满血",
 
   "item.moonfabric.nightmare_base_reversal_card": "§4不稳卡片",
   "item.nightmare_base_reversal_card.tool.string": "每次复活时属性恢复速度减少至2%",
@@ -1737,7 +1738,7 @@
   "advancements.tooltip.nightmare_base_insight_collapse.hand": "崩解之力",
 
   "moonstone.jei.item.moonfabric.nightmare_base_insight_drug": "完成医药箱的所有任务",
-  "moonstone.jei.item.moonfabric.nightmare_base_insight_insane": "死掉或者跳入末地传送门回主世界",
+  "moonstone.jei.item.moonfabric.nightmare_base_insight_insane": "杀死任意生物",
   "moonstone.jei.item.moonfabric.nightmare_base_insight_collapse": "杀死末影龙",
 
 

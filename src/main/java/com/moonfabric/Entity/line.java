@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class line extends TameableEntity {
+public class line extends TameableZombie {
 
     private LivingEntity target;
     private final List<Vec3d> trailPositions = new ArrayList<>();

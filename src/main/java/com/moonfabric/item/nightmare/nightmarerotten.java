@@ -32,7 +32,7 @@ public class nightmarerotten extends nightmare {
         Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> modifierMultimap = HashMultimap.create();
 
         for(EntityAttribute entityAttribute : Registries.ATTRIBUTE) {
-            modifierMultimap.put(Registries.ATTRIBUTE.getEntry(entityAttribute),new EntityAttributeModifier(Identifier.of("base_attack_damage"+this.getTranslationKey()),0.33, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
+            modifierMultimap.put(Registries.ATTRIBUTE.getEntry(entityAttribute),new EntityAttributeModifier(Identifier.of("base_attack_damage"+this.getTranslationKey()),0.2, EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE));
         }
 
         return modifierMultimap;

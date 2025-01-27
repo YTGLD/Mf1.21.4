@@ -87,7 +87,7 @@
 
   "item.moonfabric.nightmare_base_reversal_orb": "§4Reversal Orb",
   "item.nightmare_base_reversal_orb.tool.string": "Healing will only reduce health",
-  "item.nightmare_base_reversal_orb.tool.string.2": "Resets health to full every 10 seconds",
+  "item.nightmare_base_reversal_orb.tool.string.2": "Resets health to full every 7 seconds",
 
   "item.moonfabric.nightmare_base_reversal_card": "§4Unstable Card",
   "item.nightmare_base_reversal_card.tool.string": "The speed of attribute recovery during each resurrection is reduced to 2%",
@@ -239,7 +239,7 @@
   "advancements.tooltip.nightmare_base_insight_collapse.hand": "Strength of Collapse",
 
   "moonstone.jei.item.moonfabric.nightmare_base_insight_drug": "Complete all tasks in the medicine box",
-  "moonstone.jei.item.moonfabric.nightmare_base_insight_insane": "Die or jump into the End portal to return to the Overworld",
+  "moonstone.jei.item.moonfabric.nightmare_base_insight_insane": "Kill any mob",
   "moonstone.jei.item.moonfabric.nightmare_base_insight_collapse": "Kill the Ender Dragon",
 
 
@@ -523,7 +523,7 @@
   "item.reanimation.tool.string.1": "Simultaneous restoration of basic functions of vital organs",
   "item.reanimation.tool.string.2": "Resurrect！",
   "item.reanimation.tool.string.3": "300 seconds cooldown",
-  "item.reanimation.tool.string.4": "die",
+  "item.reanimation.tool.string.4": "Kill any mob",
 
 
   "item.autolytic.tool.string": "Suppresses the swimming speed reduction effect from the Necora virus",
@@ -748,7 +748,7 @@
   "advancements.tooltip.quadriceps.text": "jump:500",
 
   "advancements.tooltip.reanimation.hand": "reanimation",
-  "advancements.tooltip.reanimation.text": "die",
+  "advancements.tooltip.reanimation.text": "Kill any mob",
 
   "advancements.tooltip.necora.hand": "necora",
   "advancements.tooltip.necora.text": "Open the dungeon box while wearing this item",

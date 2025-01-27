@@ -13,6 +13,8 @@ import com.moonfabric.item.common.*;
 import com.moonfabric.item.common.max.glodstone;
 import com.moonfabric.item.common.pain.*;
 import com.moonfabric.item.dna.dna;
+import com.moonfabric.item.dna.med.*;
+import com.moonfabric.item.dna.medicinebox;
 import com.moonfabric.item.ectoplasm.*;
 import com.moonfabric.item.nightmare.super_nightmare.*;
 import com.moonfabric.item.necora;
@@ -177,6 +179,12 @@ public class init  {
     public static final Item nightmare_base_start_egg =register("nightmare_base_start_egg", nightmare_base_start_egg::new);
 
     public static final Item nightmare_base_start_power =register("nightmare_base_start_power", nightmare_base_start_power::new);
+    public static final Item medicinebox =register("medicinebox", medicinebox::new);
+    public static final Item calcification =register("calcification", calcification::new);
+    public static final Item masticatory =register("masticatory", masticatory::new);
+    public static final Item polyphagia =register("polyphagia", polyphagia::new);
+    public static final Item quadriceps =register("quadriceps", quadriceps::new);
+    public static final Item reanimation =register("reanimation", reanimation::new);
 
     public static Item register(String key, Function<Item.Settings, Item> factory) {
         final RegistryKey<Item> registryKey = RegistryKey.of(RegistryKeys.ITEM, Identifier.of(MoonFabricMod.MODID, key));

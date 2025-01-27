@@ -112,8 +112,8 @@ public class AdvancementEvt {
             }
         }
     }
-    public static void nightmare_base_insight_insane(DamageSource damageSource,LivingEntity livingEntity){
-        if  (livingEntity instanceof PlayerEntity player){
+    public static void nightmare_base_insight_insane(DamageSource source,LivingEntity livingEntity){
+        if  (source.getSource() instanceof PlayerEntity player){
             if (HasCurio.has(init.nightmare_base_insight, player)){
                 AccessoriesCapability capability = AccessoriesCapability.get(player);
                 if (capability != null) {
@@ -125,7 +125,8 @@ public class AdvancementEvt {
                             if (!stack.isEmpty()) {
                                 if (stack.get(Data.CUSTOM_DATA) != null) {
                                     if (!stack.get(Data.CUSTOM_DATA).getBoolean(nightmare_base_insight_insane)) {
-                                        player.giveItemStack(new ItemStack(init.nightmare_base_insight_insane));
+                                        player.getWorld().spawnEntity(new ItemEntity(player.getWorld(),player.getX(),player.getY(),player.getZ(),
+                                                new ItemStack(init.nightmare_base_insight_insane)));
                                         stack.get(Data.CUSTOM_DATA).putBoolean(nightmare_base_insight_insane, true);
                                     }
                                 }

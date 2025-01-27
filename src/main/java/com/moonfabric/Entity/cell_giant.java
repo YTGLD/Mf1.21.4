@@ -3,6 +3,7 @@ package com.moonfabric.Entity;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.mojang.logging.LogUtils;
+import com.moonfabric.HandlerMain;
 import com.moonfabric.HasCurio;
 import com.moonfabric.init.InItEntity;
 import net.minecraft.block.BlockRenderType;
@@ -136,22 +137,21 @@ public class cell_giant extends TameableZombie {
         }
 
         if (this.getOwner()!= null) {
-            if (this.getOwner().getLastAttacker()!= null) {
-                if (!(this.getOwner().getLastAttacker() ==(this))) {
+            if (this.getOwner().getLastAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getLastAttacker())) {
+                if (!(this.getOwner().getLastAttacker() == (this))) {
                     this.setTarget(this.getOwner().getLastAttacker());
                 }
             }
-            if (this.getOwner().getAttacker()!= null) {
-                if (!(this.getOwner().getAttacker() ==(this))) {
-                    this.setTarget(this.getOwner().getAttacker());
-                }
-
-            }
-            if (this.getOwner().getAttacking()!= null) {
-                if (!(this.getOwner().getAttacking() ==(this))) {
+            if (this.getOwner().getAttacking()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacking())) {
+                if (!(this.getOwner().getAttacking() == (this))) {
                     this.setTarget(this.getOwner().getAttacking());
                 }
 
+            }
+            if (this.getOwner().getAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacker())) {
+                if (!(this.getOwner().getAttacker() == (this))) {
+                    this.setTarget(this.getOwner().getAttacker());
+                }
             }
         }
         if (this.getTarget() != null) {

@@ -2,6 +2,7 @@ package com.moonfabric.Entity;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.moonfabric.HandlerMain;
 import com.moonfabric.HasCurio;
 import com.moonfabric.Ievent.AllEvent;
 import com.moonfabric.init.InItEntity;
@@ -22,6 +23,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
@@ -66,22 +69,21 @@ public class cell_zombie  extends TameableZombie {
             }
         }
         if (this.getOwner()!= null) {
-            if (this.getOwner().getLastAttacker()!= null) {
-                if (!(this.getOwner().getLastAttacker() ==(this))) {
+            if (this.getOwner().getLastAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getLastAttacker())) {
+                if (!(this.getOwner().getLastAttacker() == (this))) {
                     this.setTarget(this.getOwner().getLastAttacker());
                 }
             }
-            if (this.getOwner().getAttacker()!= null) {
-                if (!(this.getOwner().getAttacker() ==(this))) {
-                    this.setTarget(this.getOwner().getAttacker());
-                }
-
-            }
-            if (this.getOwner().getAttacking()!= null) {
-                if (!(this.getOwner().getAttacking() ==(this))) {
+            if (this.getOwner().getAttacking()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacking())) {
+                if (!(this.getOwner().getAttacking() == (this))) {
                     this.setTarget(this.getOwner().getAttacking());
                 }
 
+            }
+            if (this.getOwner().getAttacker()!= null&& HandlerMain.IsNoon(this,this.getOwner().getAttacker())) {
+                if (!(this.getOwner().getAttacker() == (this))) {
+                    this.setTarget(this.getOwner().getAttacker());
+                }
             }
         }
         if (!this.getCommandTags().contains(AllEvent.muMMY)) {
@@ -106,6 +108,18 @@ public class cell_zombie  extends TameableZombie {
                 }
             }
         }
+    }
+    @Nullable
+    protected SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_ZOMBIE_AMBIENT;
+    }
+
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_ZOMBIE_HURT;
+    }
+
+    protected SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_ZOMBIE_DEATH;
     }
     private Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> calcificationMultimap(LivingEntity livingEntity){
        Multimap<RegistryEntry<EntityAttribute>, EntityAttributeModifier> modifierMultimap = HashMultimap.create();

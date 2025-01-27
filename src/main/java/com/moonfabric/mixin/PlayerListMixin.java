@@ -1,6 +1,8 @@
 package com.moonfabric.mixin;
 
+import com.moonfabric.Ievent.AdvancementEvt;
 import com.moonfabric.init.init;
+import com.moonfabric.item.dna.medicinebox;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.ClientConnection;
 import net.minecraft.server.PlayerManager;
@@ -17,6 +19,7 @@ public class PlayerListMixin {
     private void onPlayerConnect(ClientConnection connection, ServerPlayerEntity player, ConnectedClientData clientData, CallbackInfo ci){
         if (!player.getCommandTags().contains("nightmare")){
             player.giveItemStack(new ItemStack(init.nightmare_base));
+
             player.addCommandTag("nightmare");
         }
     }

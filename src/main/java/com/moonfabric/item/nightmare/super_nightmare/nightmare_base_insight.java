@@ -1,6 +1,9 @@
 package com.moonfabric.item.nightmare.super_nightmare;
 
 import com.moonfabric.HasCurio;
+import com.moonfabric.Ievent.AdvancementEvt;
+import com.moonfabric.Ievent.AllEvent;
+import com.moonfabric.init.Data;
 import com.moonfabric.init.init;
 import com.moonfabric.item.Ms.nightmare;
 import io.wispforest.accessories.api.AccessoriesCapability;
@@ -10,6 +13,7 @@ import io.wispforest.accessories.impl.ExpandedSimpleContainer;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -38,7 +42,25 @@ public class nightmare_base_insight extends com.moonfabric.item.Ms.SNightmare{
                     AccessoriesContainer container = stringAccessoriesContainerEntry.getValue();
                     ExpandedSimpleContainer accessories = container.getAccessories();
                     for (int i = 0; i < accessories.size(); ++i) {
-
+                        ItemStack box = accessories.getStack(i);
+                        if (box.isOf(init.medicinebox)) {
+                            NbtCompound tag = box.get(Data.CUSTOM_DATA);
+                            if (tag != null) {
+                                if (tag.getBoolean(AllEvent.blood_eat) &&
+                                        tag.getBoolean(AllEvent.blood_hurt) &&
+                                        tag.getBoolean(AllEvent.blood_jump) &&
+                                        tag.getBoolean(AllEvent.blood_spawn) &&
+                                        tag.getBoolean(AllEvent.blood_enchant))
+                                {
+                                    if (stack.get(Data.CUSTOM_DATA)!=null&& !stack.get(Data.CUSTOM_DATA).getBoolean(AdvancementEvt.nightmare_base_insight_drug)){
+                                        if (reference.entity() instanceof PlayerEntity player){
+                                            player.giveItemStack(new ItemStack(init.nightmare_base_insight_drug));
+                                            stack.get(Data.CUSTOM_DATA).putBoolean(AdvancementEvt.nightmare_base_insight_drug,true);
+                                        }
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

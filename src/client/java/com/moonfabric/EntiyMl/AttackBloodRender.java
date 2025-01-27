@@ -63,8 +63,8 @@ public class AttackBloodRender <T extends attack_blood> extends EntityRenderer<T
 
     public void getBloodOutLine(@NotNull MatrixStack matrices, @NotNull VertexConsumerProvider vertexConsumers, int light, float s) {
         {
-            int stacks = 20; // 垂直方向的分割数
-            int slices = 20; // 水平方向的分割数
+            int stacks = 10; // 垂直方向的分割数
+            int slices = 10; // 水平方向的分割数
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.getBloodCommon());
             for (int i = 0; i < stacks; ++i) {
                 float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);
@@ -98,8 +98,8 @@ public class AttackBloodRender <T extends attack_blood> extends EntityRenderer<T
             }
         }
         {
-            int stacks = 20; // 垂直方向的分割数
-            int slices = 20; // 水平方向的分割数
+            int stacks = 10; // 垂直方向的分割数
+            int slices = 10; // 水平方向的分割数
             VertexConsumer vertexConsumer = vertexConsumers.getBuffer(MRender.BLOOD_OUTLINE);
             for (int i = 0; i < stacks; ++i) {
                 float phi0 = (float) Math.PI * ((i + 0) / (float) stacks);

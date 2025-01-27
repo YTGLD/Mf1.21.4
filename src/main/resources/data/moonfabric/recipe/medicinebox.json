@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "minecraft:chest",
+    "moonfabric:ectoplasmcube"
+  ],
+  "result": {
+    "id": "moonfabric:medicinebox",
+    "count": 1
+  }
+}

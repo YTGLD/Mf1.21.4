@@ -17,6 +17,7 @@ import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -28,7 +29,7 @@ import java.util.UUID;
 
 import static net.minecraft.entity.SpawnReason.BREEDING;
 
-public class attack_blood extends TameableEntity {
+public class attack_blood extends TameableZombie {
 
     private final List<Vec3d> trailPositions = new ArrayList<>();
     public float damages = 4;
@@ -52,7 +53,9 @@ public class attack_blood extends TameableEntity {
     @Override
     public void tick() {
         super.tick();
-        if (!this.getEntityWorld().getBlockState(this.getBlockPos()).isAir()){
+        BlockPos blockPos = this.getBlockPos();
+
+        if (this.getEntityWorld().getBlockState(blockPos).isSolid()) {
             this.discard();
         }
         this.setNoGravity(true);
@@ -88,7 +91,7 @@ public class attack_blood extends TameableEntity {
                 this.setTarget(null);
             }
         }
-        if (this.age > 200) {
+        if (this.age > 140) {
             this.discard();
         }
         if (getTarget() != null) {

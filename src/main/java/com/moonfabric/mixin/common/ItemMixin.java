@@ -2,6 +2,7 @@ package com.moonfabric.mixin.common;
 
 import com.moonfabric.HasCurio;
 import com.moonfabric.init.init;
+import com.moonfabric.item.dna.med.masticatory;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -31,6 +32,7 @@ public abstract class ItemMixin {
     }
     @Inject(method = "getMaxUseTime", at = @At(value = "RETURN"), cancellable = true)
     private void eat(ItemStack stack, LivingEntity user, CallbackInfoReturnable<Integer> cir){
+        masticatory.masticatory_(stack,cir,user);
         if (HasCurio.has(init.pain_book,user)){
 
             if (stack.getUseAction() == UseAction.EAT){

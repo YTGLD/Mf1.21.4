@@ -2,6 +2,7 @@ package com.moonfabric.item.nightmare;
 
 import com.moonfabric.item.Ms.nightmare;
 import io.wispforest.accessories.api.attributes.AccessoryAttributeBuilder;
+import io.wispforest.accessories.api.attributes.SlotAttribute;
 import io.wispforest.accessories.api.slot.SlotReference;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ItemStack;
@@ -21,9 +22,8 @@ public class nightmarecharm extends nightmare {
 
     @Override
     public void getDynamicModifiers(ItemStack stack, SlotReference reference, AccessoryAttributeBuilder builder) {
-        builder.getSlotModifiers().put("hand/ring",new EntityAttributeModifier(Identifier.of(String.valueOf(this.getTranslationKey())),1, EntityAttributeModifier.Operation.ADD_VALUE));
+        SlotAttribute.addSlotAttribute(builder,"ring", Identifier.of(String.valueOf(this.getTranslationKey())),1, EntityAttributeModifier.Operation.ADD_VALUE,true);
     }
-
 
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {

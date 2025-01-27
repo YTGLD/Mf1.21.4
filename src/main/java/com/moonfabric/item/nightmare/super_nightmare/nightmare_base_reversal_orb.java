@@ -49,7 +49,7 @@ public class nightmare_base_reversal_orb extends com.moonfabric.item.Ms.SNightma
         if (reference.entity() instanceof PlayerEntity player){
             if (!player.getItemCooldownManager().isCoolingDown(this.getDefaultStack())){
                 player.setHealth(player.getMaxHealth());
-                player.getItemCooldownManager().set(this.getDefaultStack(),200);
+                player.getItemCooldownManager().set(this.getDefaultStack(),140);
             }
         }
     }

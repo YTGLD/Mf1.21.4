@@ -11,6 +11,9 @@ import com.moonfabric.item.common.Blood.blood_stones;
 import com.moonfabric.item.common.death_penalty;
 import com.moonfabric.item.common.double_head;
 import com.moonfabric.item.dna.dna;
+import com.moonfabric.item.dna.med.calcification;
+import com.moonfabric.item.dna.med.reanimation;
+import com.moonfabric.item.dna.medicinebox;
 import com.moonfabric.item.ectoplasm.ectoplasmapple;
 import com.moonfabric.item.ectoplasm.ectoplasmhorseshoe;
 import com.moonfabric.item.ectoplasm.ectoplasmshild;
@@ -19,8 +22,10 @@ import com.moonfabric.item.nightmare.super_nightmare.*;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
+import net.minecraft.entity.damage.DamageTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.fluid.FluidState;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.Vec3d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -53,6 +58,24 @@ public abstract class LivingEntityMixinAll {
         nightmare_base_insight_insane.damage(source,cir);
         nightmare_base_fool_bone.attLook(livingEntity, source,cir);
         nightmare_base_redemption_deception.LivingIncomingDamageEvent(source, livingEntity,cir);
+        medicinebox.hurt(livingEntity,source);
+        calcification.calcification_(source,livingEntity,cir);
+        reanimation.reanimation_(source,livingEntity,cir);
+    }
+    @Inject(method = "isInvulnerableTo", at = @At(value = "RETURN"), cancellable = true)
+    private void isInvulnerableTo(ServerWorld world, DamageSource source, CallbackInfoReturnable<Boolean> cir){
+        LivingEntity livingEntity = (LivingEntity) (Object) this;
+        if (HasCurio.has(init.nightmare_base_redemption_degenerate, livingEntity)){
+            if (source.isOf(DamageTypes.FALL)
+                    ||source.isOf(DamageTypes.LAVA)
+                    ||source.isOf(DamageTypes.ON_FIRE)
+                    ||source.isOf(DamageTypes.IN_FIRE)
+                    ||source.isOf(DamageTypes.MAGIC)
+
+            ){
+                cir.setReturnValue(true);
+            }
+        }
     }
     @Inject(method = "getMaxHealth", at = @At(value = "RETURN"), cancellable = true)
     private void getMaxHealth(CallbackInfoReturnable<Float> cir){
@@ -71,7 +94,10 @@ public abstract class LivingEntityMixinAll {
     private void mf$modifyAppliedDamage_m(DamageSource damageSource, CallbackInfo ci){
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         AdvancementEvt.nightmare_base_start_egg(damageSource,livingEntity);
+
         AdvancementEvt.nightmare_base_insight_insane(damageSource,livingEntity);
+
+
         AdvancementEvt.nightmare_base_fool(damageSource,livingEntity);
         AdvancementEvt.nightmare_base_redemption_degenerate(damageSource,livingEntity);
         AdvancementEvt.nightmare_base_redemption_deception(damageSource,livingEntity);
@@ -79,6 +105,7 @@ public abstract class LivingEntityMixinAll {
         AdvancementEvt.nightmare_base_stone_meet(damageSource,livingEntity);
         AdvancementEvt.nightmare_base_stone_brain(damageSource,livingEntity);
         AdvancementEvt.drop(damageSource,livingEntity);
+        medicinebox.die(livingEntity,damageSource);
 
 
 
@@ -95,6 +122,7 @@ public abstract class LivingEntityMixinAll {
         nightmare_base_insight_insane.LivingDeathEvents(damageSource,livingEntity);
         nightmare_base_black_eye_red.kill(damageSource);
         LootOrBlockLuck.dropLootItem(livingEntity,init.mblock,1,damageSource, EntityType.ZOMBIE);
+        LootOrBlockLuck.dropLootItem(livingEntity,init.meye,1,damageSource, EntityType.ZOMBIE);
         LootOrBlockLuck.dropLootItem(livingEntity,init.greedcrystal,1,damageSource, EntityType.ZOMBIE);
     }
     @Inject(method = "canWalkOnFluid", at = @At(value = "RETURN"), cancellable = true)
@@ -121,6 +149,11 @@ public abstract class LivingEntityMixinAll {
             }
         }
 
+    }
+    @Inject(method = "jump", at = @At(value = "HEAD"))
+    private void onDeath(CallbackInfo ci){
+        LivingEntity livingEntity = (LivingEntity) (Object) this;
+        medicinebox.jumo(livingEntity);
     }
     @ModifyVariable(method = "heal", at = @At(value = "HEAD"), index = 1, argsOnly = true)
     public float heal(float amout) {

@@ -21,7 +21,15 @@
     "moonfabric:pain_box",
     "moonfabric:pain_carrot",
     "moonfabric:mblock",
-    "moonfabric:dna"
+    "moonfabric:dna",
+
+    "moonfabric:medicinebox",
+
+    "moonfabric:calcification",
+    "moonfabric:masticatory",
+    "moonfabric:polyphagia",
+    "moonfabric:quadriceps",
+    "moonfabric:reanimation"
 
 
   ]

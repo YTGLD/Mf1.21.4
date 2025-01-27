@@ -146,7 +146,13 @@ public class aaa {
 
         c.add(new ItemStack(init.abook));
         c.add(new ItemStack(init.dna));
+        c.add(new ItemStack(init.medicinebox));
         c.add(new ItemStack(init.necora));
+        c.add(new ItemStack(init.calcification));
+        c.add(new ItemStack(init.masticatory));
+        c.add(new ItemStack(init.polyphagia));
+        c.add(new ItemStack(init.quadriceps));
+        c.add(new ItemStack(init.reanimation));
 
 
         c.add(new ItemStack(DNAItems.atp_height));

@@ -7,6 +7,7 @@ import com.moonfabric.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.minecraft.block.ComposterBlock;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
@@ -68,5 +69,33 @@ public class MoonFabricMod implements ModInitializer {
 		Registry.register(Registries.ITEM_GROUP, Identifier.of("moonfabric", "moonfabric_tab"), aaa.Moon_Fabric_Tab);
 		Registry.register(Registries.ITEM_GROUP, Identifier.of("moonfabric", "moonfabric_tab_dna"), aaa.DNA);
 
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.atp_height, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_acid, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_big_boom, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_bone_add, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_break_down_water, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_chromosome, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_compress, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_constant, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_cranial, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_darwin, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_digestion, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_disorder, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_dna_suppression, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_eyes, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_flu, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_god, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_ground, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_in_air, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_in_water, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_inheritance, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_necrosis, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_off_on, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_oxygen, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_preferential, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_putrefactive, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_sense, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.cell_synthesis, 0.8f);
+		ComposterBlock.ITEM_TO_LEVEL_INCREASE_CHANCE.put(DNAItems.speed_metabolism, 0.8f);
 	}
 }

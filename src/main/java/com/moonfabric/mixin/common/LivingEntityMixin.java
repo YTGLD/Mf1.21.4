@@ -123,22 +123,23 @@ public abstract class LivingEntityMixin {
         LivingEntity livingEntity = (LivingEntity) (Object) this;
         if (livingEntity  instanceof PlayerEntity player){
             if (HasCurio.has(init.sevensword,player)){
-                if (!player.getItemCooldownManager().isCoolingDown(init.sevensword.getDefaultStack())){
-                    for (int i = 0 ;i<7 ;i++){
-                        float s  = (float) Math.sin(i);
-                        if (s <= 0){
-                            s = 0.12f;
-                        }
+                if (source.getSource() instanceof LivingEntity ) {
+                    if (!player.getItemCooldownManager().isCoolingDown(init.sevensword.getDefaultStack())) {
+                        for (int i = 0; i < 7; i++) {
+                            float s = (float) Math.sin(i);
+                            if (s <= 0) {
+                                s = 0.12f;
+                            }
 
-                        flysword flysword = new flysword(InItEntity.Fly, player.getWorld());
-                        flysword.setPos(player.getX()+MathHelper.nextFloat(Random.create(), -s,s),player.getY()+2+s,player.getZ()+MathHelper.nextFloat(Random.create(), -s,s));
-                        flysword.setVelocity(MathHelper.nextFloat(Random.create(), -s/1.5f,s/1.5f),s/1.5f,MathHelper.nextFloat(Random.create(), -s/1.5f,s/1.5f));
-                        player.getWorld().spawnEntity(flysword);
-                        player.getItemCooldownManager().set(init.sevensword.getDefaultStack(),35);
+                            flysword flysword = new flysword(InItEntity.Fly, player.getWorld());
+                            flysword.setPos(player.getX() + MathHelper.nextFloat(Random.create(), -s, s), player.getY() + 2 + s, player.getZ() + MathHelper.nextFloat(Random.create(), -s, s));
+                            flysword.setVelocity(MathHelper.nextFloat(Random.create(), -s / 1.5f, s / 1.5f), s / 1.5f, MathHelper.nextFloat(Random.create(), -s / 1.5f, s / 1.5f));
+                            player.getWorld().spawnEntity(flysword);
+                            player.getItemCooldownManager().set(init.sevensword.getDefaultStack(), 35);
+                        }
                     }
                 }
             }
-
 
             if (HasCurio.has(init.bloodtime, player)){
                 player.timeUntilRegen = (int) (player.timeUntilRegen * 1.3);
