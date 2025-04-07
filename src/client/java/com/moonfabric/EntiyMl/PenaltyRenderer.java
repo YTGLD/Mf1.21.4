@@ -30,7 +30,7 @@ public class PenaltyRenderer <T extends penalty> extends EntityRenderer<T,Living
     public void render(LivingEntityRenderState state, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light) {
         getBloodOutLine(matrices,vertexConsumers,240,0.18f);
         if (state instanceof LivingEntityRenderStateExtension e){
-            if (e.getEntity() instanceof penalty t) {
+            if (e.accessories$getEntity().isPresent() &&e.accessories$getEntity ().get() instanceof penalty t) {
                 setT(matrices, t, vertexConsumers);
             }
         }

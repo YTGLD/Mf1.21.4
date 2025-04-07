@@ -1,23 +1,28 @@
 package com.moonfabric;
 
 import com.mojang.logging.LogUtils;
-import com.moonfabric.Effects.initEffect;
 import com.moonfabric.Ievent.evt.Aevent;
 import com.moonfabric.init.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.particle.v1.FabricParticleTypes;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.ComposterBlock;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.particle.SimpleParticleType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 
+import java.io.File;
+
 
 public class MoonFabricMod implements ModInitializer {
+
+	public static MFConfig CONFIG;
+	private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(),
+			"moonfabric.json");
+
 
 	public static final Logger LOGGER = LogUtils.getLogger();
 	public static final String MODID = "moonfabric";
@@ -30,6 +35,12 @@ public class MoonFabricMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
+		if (!CONFIG_FILE.exists()) {
+			CONFIG = new MFConfig();
+			CONFIG.save(CONFIG_FILE);
+		} else {
+			CONFIG = MFConfig.load(CONFIG_FILE);
+		}
 
 		new Aevent();
 

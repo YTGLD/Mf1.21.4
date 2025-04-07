@@ -103,6 +103,7 @@ public abstract class LivingEntityMixinAll {
         AdvancementEvt.nightmare_base_redemption_deception(damageSource,livingEntity);
         AdvancementEvt.nightmare_base_reversal_card(damageSource,livingEntity);
         AdvancementEvt.nightmare_base_stone_meet(damageSource,livingEntity);
+
         AdvancementEvt.nightmare_base_stone_brain(damageSource,livingEntity);
         AdvancementEvt.drop(damageSource,livingEntity);
         medicinebox.die(livingEntity,damageSource);

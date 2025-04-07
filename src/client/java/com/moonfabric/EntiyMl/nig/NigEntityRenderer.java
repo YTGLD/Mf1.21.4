@@ -61,7 +61,7 @@ public class NigEntityRenderer  extends MobEntityRenderer<nightmare_giant, Warde
         renderSphereBlood(matrixStack,vertexConsumerProvider,240,0.35f);
         matrixStack.pop();
         if (livingLivingEntityRenderState instanceof LivingEntityRenderStateExtension e) {
-            if (e.getEntity() instanceof nightmare_giant nightmareGiant) {
+            if (e.accessories$getEntity().isPresent()&&e.accessories$getEntity().get() instanceof nightmare_giant nightmareGiant) {
                 Vec3d playerPos = nightmareGiant.getPos();
                 float range = 16;
                 List<cell_zombie> entities =

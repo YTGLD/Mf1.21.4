@@ -37,6 +37,42 @@ public class owner_blood extends TameableEntity {
     public owner_blood(EntityType<? extends owner_blood> p_21803_, World p_21804_) {
         super(p_21803_, p_21804_);
         this.setNoGravity(true);
+        for (int i = 0; i < trailPositions.length; i++) {
+            trailPositions[i][0] = Vec3d.ZERO;
+            trailPositions[i][1] = Vec3d.ZERO;
+        }
+    }
+
+    public static final int max = 128;
+    private int trailPointer = -1;
+
+    private final Vec3d[][] trailPositions = new Vec3d[max][2];
+
+    public Vec3d getTrailPosition(int pointer, float partialTick) {
+        if (this.isRemoved()) {
+            partialTick = 1.0F;
+        }
+
+        int i = (this.trailPointer - pointer) & max-1;
+        int j = (this.trailPointer - pointer - 1) & max-1;
+
+        Vec3d d0 = this.trailPositions[j][0];
+        Vec3d d1 = this.trailPositions[i][0].subtract(d0);
+        return d0.add(d1.multiply(partialTick));
+    }
+
+    public Vec3d getHelmetPosition() {
+        return this.getPos();
+    }
+
+    public void tickVisual() {
+        Vec3d blue = getHelmetPosition();
+        this.trailPointer = (this.trailPointer + 1) % this.trailPositions.length;
+        this.trailPositions[this.trailPointer][0] = blue;
+    }
+
+    public boolean hasTrail() {
+        return trailPointer != -1;
     }
 
 
@@ -48,15 +84,13 @@ public class owner_blood extends TameableEntity {
     public boolean isInvulnerableTo(ServerWorld world, DamageSource source) {
         return true;
     }
-    private final List<Vec3d> trailPositions = new ArrayList<>();
-    public List<Vec3d> getTrailPositions() {
-        return trailPositions;
-    }
     @Override
     public void tick() {
         super.tick();
         this.setNoGravity(true);
-
+        if (getEntityWorld().isClient) {
+            tickVisual();
+        }
         this.timeUntilRegen += 100;
 
         if (getOwner()==null){
@@ -97,11 +131,6 @@ public class owner_blood extends TameableEntity {
                     this.discard();
                 }
             }
-        }
-        trailPositions.add(new Vec3d(this.getX(), this.getY(), this.getZ()));
-
-        if (trailPositions.size() > 66) {
-            trailPositions.removeFirst();
         }
 
         if (this.getTarget() != null) {

@@ -26,7 +26,7 @@ public class LineRender <T extends line> extends EntityRenderer<T, LivingEntityR
     public void render(LivingEntityRenderState state, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
         super.render(state, matrixStack, vertexConsumers, light);
         if (state instanceof LivingEntityRenderStateExtension e){
-            if (e.getEntity() instanceof line t) {
+            if (e.accessories$getEntity().isPresent() &&e.accessories$getEntity().get() instanceof line t) {
                 setT(matrixStack, t, vertexConsumers);
             }
         }

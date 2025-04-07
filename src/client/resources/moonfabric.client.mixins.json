@@ -6,7 +6,6 @@
     "DrawContextMixin",
     "GameRendererMixin",
     "HandledScreenMixin",
-    "LivingEntityRendererMixin",
     "RenderLayersMixin",
     "WorldRendererMixin"
   ],

@@ -5,6 +5,7 @@ import com.moonfabric.MoonFabricMod;
 import com.moonfabric.init.InItEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -12,10 +13,15 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.projectile.thrown.SnowballEntity;
+import net.minecraft.entity.projectile.thrown.ThrownItemEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.registry.Registries;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
@@ -37,13 +43,20 @@ public class attack_blood extends TameableZombie {
     public boolean slime = false;
     public boolean boom = false;
     public boolean effect = false;
-    public float speeds = 0.125f;
+    public float speeds = 0.15f;
     public LivingEntity target;
     public attack_blood(EntityType<? extends attack_blood> entityType, World level) {
         super(entityType, level);
         this.setNoGravity(true);
 
     }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return null;
+    }
+
 
     public List<Vec3d> getTrailPositions() {
         return trailPositions;
@@ -53,11 +66,6 @@ public class attack_blood extends TameableZombie {
     @Override
     public void tick() {
         super.tick();
-        BlockPos blockPos = this.getBlockPos();
-
-        if (this.getEntityWorld().getBlockState(blockPos).isSolid()) {
-            this.discard();
-        }
         this.setNoGravity(true);
         Vec3d playerPos = this.getPos().add(0, 0.75, 0);
         int range = 1;
@@ -122,15 +130,19 @@ public class attack_blood extends TameableZombie {
                             .add(direction.normalize().multiply(Math.sin(angleLimit))); // 根据目标方向进行调整
 
                     this.setVelocity(limitedDirection.x * (speeds + s), limitedDirection.y * (speeds + s), limitedDirection.z * (speeds + s));
+                    this.setPosition(currentPos.add(this.getVelocity()));
                 } else {
                     this.setVelocity(direction.x * (speeds + s), direction.y * (speeds + s), direction.z * (speeds + s));
+                    this.setPosition(currentPos.add(this.getVelocity()));
                 }
+
             }else {
                 if (this.age < 50) {
                     Vec3d targetPos = getTarget().getPos().add(0, 0.5, 0);
                     Vec3d currentPos = this.getPos();
                     Vec3d direction = targetPos.subtract(currentPos).normalize();
                     this.setVelocity(direction.x * (speeds + s), direction.y * (speeds + s), direction.z * (speeds + s));
+                    this.setPosition(currentPos.add(this.getVelocity()));
                 }
             }
         }
@@ -205,20 +217,6 @@ public class attack_blood extends TameableZombie {
         this.slime = slime;
     }
 
-    @Override
-    public boolean canHit() {
-        return false;
-    }
-
-    @Override
-    public boolean isInvulnerable() {
-        return true;
-    }
-
-    @Override
-    public boolean isInvulnerableTo(ServerWorld world, DamageSource source) {
-        return true;
-    }
 
     public void setCannotFollow(boolean t) {
         follow = t;
@@ -232,7 +230,7 @@ public class attack_blood extends TameableZombie {
     @Nullable
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
-        attack_blood line = InItEntity.attack_blood.create(world,BREEDING);
+        attack_blood line = InItEntity.attack_blood.create(world, SpawnReason.BREEDING);
         if (line != null) {
             UUID uuid = this.getOwnerUuid();
             if (uuid != null) {

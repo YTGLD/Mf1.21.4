@@ -1,6 +1,7 @@
 package com.moonfabric.EntiyMl;
 
 import com.moonfabric.Entity.attack_blood;
+import com.moonfabric.Entity.line;
 import com.moonfabric.Handler;
 import com.moonfabric.MRender;
 import io.wispforest.accessories.pond.LivingEntityRenderStateExtension;
@@ -10,8 +11,11 @@ import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
+import net.minecraft.client.render.entity.state.EntityRenderState;
 import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.entity.Entity;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +34,7 @@ public class AttackBloodRender <T extends attack_blood> extends EntityRenderer<T
     public void render(LivingEntityRenderState state, MatrixStack matrixStack, VertexConsumerProvider vertexConsumers, int light) {
         getBloodOutLine(matrixStack,vertexConsumers,240,0.25f);
         if (state instanceof LivingEntityRenderStateExtension e){
-            if (e.getEntity() instanceof attack_blood t) {
+            if (e.accessories$getEntity().isPresent() &&e.accessories$getEntity().get() instanceof attack_blood t) {
                 setT(matrixStack, t, vertexConsumers);
             }
         }

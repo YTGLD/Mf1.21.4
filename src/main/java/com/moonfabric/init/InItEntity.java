@@ -29,16 +29,16 @@ public class InItEntity {
                     .build(RegistryKey.of(Registries.ENTITY_TYPE.getKey(), Identifier.of(MoonFabricMod.MODID,"line")));
     public static final EntityType<attack_blood> attack_blood=
             FabricEntityTypeBuilder.createLiving()
-                    .dimensions(EntityDimensions.changing(0.1f,0.85f))
-                    .trackRangeBlocks(50)
-                    .defaultAttributes(IronGolemEntity::createIronGolemAttributes)
+                    .dimensions(EntityDimensions.changing(0.5f,0.5f))
+                    .trackRangeBlocks(500)
+                    .defaultAttributes(ZombieEntity::createZombieAttributes)
                     .entityFactory(attack_blood::new)
                     .build(RegistryKey.of(Registries.ENTITY_TYPE.getKey(), Identifier.of(MoonFabricMod.MODID,"attack_blood")));
 
     public static final EntityType<owner_blood> owner_blood =
             FabricEntityTypeBuilder.createLiving()
                     .dimensions(EntityDimensions.changing(1,1))
-                    .trackRangeBlocks(50)
+                    .trackRangeBlocks(500)
                     .defaultAttributes(IronGolemEntity::createIronGolemAttributes)
                     .entityFactory(owner_blood::new)
                     .build(RegistryKey.of(Registries.ENTITY_TYPE.getKey(), Identifier.of(MoonFabricMod.MODID,"owner_blood")));

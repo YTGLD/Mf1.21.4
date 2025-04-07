@@ -1,5 +1,7 @@
 package com.moonfabric;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -36,6 +38,21 @@ public class MRender extends RenderLayer {
     }, () -> {
         MinecraftClient.getInstance().getFramebuffer().beginWrite(false);
     });
+    public static final Transparency TransparencyStateShard = new Transparency("lightning_transparency", () -> {
+        RenderSystem.enableDepthTest();
+        RenderSystem.enableBlend();
+        RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA,
+                GlStateManager.DstFactor.ONE);
+        RenderSystem.depthFunc(519);
+        RenderSystem.depthMask(false);
+
+    }, () -> {
+        RenderSystem.disableBlend();
+        RenderSystem.defaultBlendFunc();
+        RenderSystem.depthMask(true);
+        RenderSystem.depthFunc(515);
+        RenderSystem.disableDepthTest();
+    });
     public static final ShaderProgramKey BLOOD_PROGRAMKey = register("blood", VertexFormats.POSITION);
     public static final RenderPhase.ShaderProgram BLOOD_PROGRAM = new RenderPhase.ShaderProgram(BLOOD_PROGRAMKey);
 
@@ -50,7 +67,21 @@ public class MRender extends RenderLayer {
                             .texture(Textures.create().add(Identifier.of(MoonFabricMod.MODID,"textures/gui/blood.png"),
                                     false, false).add(Identifier.of(MoonFabricMod.MODID,"textures/gui/blood.png"),
                                     false, false).build()).build(false));
-
+    public static final RenderLayer LIGHTNING = of(
+                    "mf_lightning",
+                    VertexFormats.POSITION_COLOR,
+                    VertexFormat.DrawMode.QUADS,
+                    1536,
+                    false,
+                    true,
+                    RenderLayer.MultiPhaseParameters.builder()
+                            .cull(DISABLE_CULLING)
+                            .program(LIGHTNING_PROGRAM)
+                            .writeMaskState(ALL_MASK)
+                            .transparency(TransparencyStateShard)
+                            .target(WEATHER_TARGET)
+                            .build(false)
+            );
     public static final RenderLayer BLOOD_OUTLINE =
             of("blood",
                     VertexFormats.POSITION,
